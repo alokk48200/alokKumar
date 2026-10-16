@@ -1,687 +1,1184 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alok Kumar — Senior Software Engineer | Distributed Systems & Network Telemetry</title>
-  <meta name="description" content="Portfolio of Alok Kumar, Senior Software Engineer at Samsung R&D Institute Bangalore. Specializing in 10 Gbps network telemetry, 5,000+ device gNMI streaming, Kafka, Kubernetes, and Agentic AI." />
+  <title>Alok Kumar — Senior Software Engineer | Distributed Systems, gNMI Telemetry & Agentic AI</title>
+  <meta name="description" content="Portfolio of Alok Kumar, Senior Software Engineer at Samsung R&D Institute Bangalore (MNNIT Allahabad '23). Specializing in 10 Gbps packet capture, 5,000+ device gNMI streaming telemetry, Kafka, Kubernetes, and Agentic AI." />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
           },
           colors: {
             obsidian: '#090A0F',
             surface: '#12141D',
-            surfaceHover: '#191C28',
-            borderSubtle: '#222638',
-            accentPurple: '#8B5CF6',
-            accentCyan: '#06B6D4',
-            accentEmerald: '#10B981'
+            surfaceElevated: '#181B26',
+            emeraldAccent: '#10B981',
+            indigoAccent: '#6366F1',
+            violetAccent: '#8B5CF6',
+            cyanAccent: '#06B6D4'
           }
         }
       }
     }
   </script>
+
   <style>
     :root {
       --bg-primary: #090A0F;
       --bg-surface: #12141D;
+      --bg-elevated: #181B26;
       --text-primary: #F3F4F6;
-      --border-color: #222638;
+      --text-secondary: #9CA3AF;
+      --border-hairline: rgba(255, 255, 255, 0.08);
+      --grid-line: rgba(139, 92, 246, 0.035);
     }
+
     html:not(.dark) {
       --bg-primary: #F8FAFC;
       --bg-surface: #FFFFFF;
+      --bg-elevated: #F1F5F9;
       --text-primary: #0F172A;
-      --border-color: #E2E8F0;
+      --text-secondary: #475569;
+      --border-hairline: rgba(15, 23, 42, 0.1);
+      --grid-line: rgba(15, 23, 42, 0.035);
     }
+
     body {
       background-color: var(--bg-primary);
       color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      background-image: 
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: 38px 38px;
+      overflow-x: hidden;
       transition: background-color 0.25s ease, color 0.25s ease;
     }
-    .grid-bg {
-      background-size: 36px 36px;
-      background-image: 
-        linear-gradient(to right, rgba(139, 92, 246, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
-    }
-    .card-surface {
+
+    .premium-card {
       background-color: var(--bg-surface);
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--border-hairline);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
+
+    .premium-card:hover {
+      border-color: rgba(139, 92, 246, 0.38);
+      box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.45);
+    }
+
+    .elevated-box {
+      background-color: var(--bg-elevated);
+      border: 1px solid var(--border-hairline);
+    }
+
+    .hairline-border {
+      border-color: var(--border-hairline);
+    }
+
+    .text-muted-custom {
+      color: var(--text-secondary);
+    }
+
     @keyframes pulseFlow {
-      0% { stroke-dashoffset: 24; }
+      0% { stroke-dashoffset: 28; }
       100% { stroke-dashoffset: 0; }
     }
+
     .animated-link {
-      stroke-dasharray: 6 6;
-      animation: pulseFlow 1.2s linear infinite;
+      stroke-dasharray: 7 5;
+      animation: pulseFlow 1s linear infinite;
+    }
+
+    /* Mode Visibility Helper Classes */
+    body[data-view-mode="recruiter"] .deepdive-only {
+      display: none !important;
+    }
+    body[data-view-mode="deepdive"] .recruiter-only {
+      display: none !important;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(139, 92, 246, 0.3);
+      border-radius: 4px;
     }
   </style>
 </head>
-<body class="font-sans antialiased selection:bg-violet-500/30 selection:text-violet-200 grid-bg min-h-screen">
+<body data-view-mode="hybrid" class="antialiased selection:bg-violet-500/30 selection:text-violet-200">
 
-  <!-- Sticky Top Navigation & Perspective Switcher -->
-  <header class="sticky top-0 z-50 backdrop-blur-xl bg-obsidian/80 dark:bg-obsidian/80 light:bg-white/80 border-b border-slate-800/80">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-        <a href="#" class="font-mono text-sm font-semibold tracking-tight">ALOK.KUMAR<span class="text-violet-400">//SDE-SR</span></a>
+  <!-- Ambient Top Glow -->
+  <div class="pointer-events-none fixed inset-x-0 top-0 z-0 flex justify-center overflow-hidden">
+    <div class="h-[320px] w-[900px] rounded-full bg-gradient-to-tr from-violet-500/15 via-cyan-500/10 to-emerald-500/10 blur-3xl"></div>
+  </div>
+
+  <!-- STICKY HEADER & PERSPECTIVE SWITCHER -->
+  <header class="sticky top-0 z-50 backdrop-blur-xl border-b hairline-border transition-colors" style="background-color: color-mix(in srgb, var(--bg-primary) 85%, transparent);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+      
+      <!-- Brand Identity -->
+      <a href="#top" class="flex items-center gap-2.5 group focus:outline-none">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500/25 to-cyan-500/20 border border-violet-500/40 flex items-center justify-center font-mono text-xs font-bold text-violet-300 group-hover:border-cyan-400 transition-colors">
+          AK
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="font-mono text-sm font-semibold tracking-tight">alok.kumar</span>
+            <span class="font-mono text-xs text-cyan-400">// sde2.samsung</span>
+          </div>
+          <span class="font-mono text-[10px] text-muted-custom hidden sm:inline">SDE 2 @ Samsung • NIT Allahabad '23 (IT)</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden xl:flex items-center gap-5 text-xs font-mono text-muted-custom">
+        <a href="#about" class="hover:text-emerald-400 transition-colors">01. About & Resume</a>
+        <a href="#gnmi-topology" class="text-cyan-400 font-semibold hover:text-cyan-300 transition-colors">02. 5K-gNMI & Topology</a>
+        <a href="#architecture" class="hover:text-violet-400 transition-colors">03. 10G & AI Blueprints</a>
+        <a href="#experience" class="hover:text-emerald-400 transition-colors">04. Experience</a>
+        <a href="#stack" class="hover:text-emerald-400 transition-colors">05. Stack</a>
+      </nav>
+
+      <!-- Live View Switcher + Theme + Export -->
+      <div class="flex items-center gap-2">
+        <div class="elevated-box p-1 rounded-lg flex items-center text-xs font-mono" role="group" aria-label="View Mode">
+          <button onclick="setViewMode('recruiter')" id="btn-mode-recruiter" class="px-2.5 py-1 rounded-md transition-all flex items-center gap-1 text-muted-custom hover:text-current">
+            <i data-lucide="briefcase" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span class="hidden sm:inline">Recruiter</span>
+          </button>
+          <button onclick="setViewMode('hybrid')" id="btn-mode-hybrid" class="px-2.5 py-1 rounded-md transition-all flex items-center gap-1 bg-violet-500/20 text-violet-300 border border-violet-500/40 font-semibold">
+            <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+            <span>Balanced</span>
+          </button>
+          <button onclick="setViewMode('deepdive')" id="btn-mode-deepdive" class="px-2.5 py-1 rounded-md transition-all flex items-center gap-1 text-muted-custom hover:text-current">
+            <i data-lucide="cpu" class="w-3.5 h-3.5 text-cyan-400"></i>
+            <span class="hidden sm:inline">Deep-Dive</span>
+          </button>
+        </div>
+
+        <button onclick="toggleTheme()" class="elevated-box p-2 rounded-lg text-muted-custom hover:text-cyan-400 transition-colors" title="Toggle Light/Dark Mode">
+          <i data-lucide="sun" id="theme-icon-light" class="w-4 h-4 hidden"></i>
+          <i data-lucide="moon" id="theme-icon-dark" class="w-4 h-4"></i>
+        </button>
+
+        <button onclick="downloadFullSingleFile()" class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition-all shadow-sm">
+          <i data-lucide="download" class="w-3.5 h-3.5"></i>
+          <span>index.html</span>
+        </button>
       </div>
+    </div>
 
-      <!-- Recruiter vs Deep-Dive Mode Toggle -->
-      <div class="flex items-center gap-1 bg-slate-900/90 border border-slate-800 p-1 rounded-lg text-xs font-mono">
-        <button onclick="setViewMode('recruiter')" id="btn-recruiter" class="px-2.5 py-1 rounded transition text-slate-400 hover:text-white">
-          Recruiter View
-        </button>
-        <button onclick="setViewMode('balanced')" id="btn-balanced" class="px-2.5 py-1 rounded transition bg-violet-600 text-white font-medium">
-          Balanced
-        </button>
-        <button onclick="setViewMode('deep')" id="btn-deep" class="px-2.5 py-1 rounded transition text-slate-400 hover:text-white">
-          Engineering Deep-Dive
-        </button>
-      </div>
-
-      <div class="flex items-center gap-3">
-        <button onclick="toggleTheme()" class="p-2 rounded-lg border border-slate-800 hover:border-violet-500/50 text-xs font-mono text-slate-300" title="Toggle Dark/Light Theme">
-          <span id="theme-label">LIGHT/DARK</span>
-        </button>
-        <a href="https://github.com/alokk48200" target="_blank" rel="noopener" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
-          GitHub ↗
-        </a>
+    <!-- Status Strip -->
+    <div class="border-t hairline-border bg-violet-500/5 px-4 py-1">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="mode-status-text" class="text-muted-custom">
+            <strong class="text-violet-400">BALANCED MODE:</strong> Showing Executive Impact + Interactive 5,000-Device gNMI Topology & 10 Gbps System Blueprints.
+          </span>
+        </div>
+        <div class="flex items-center gap-4 text-muted-custom">
+          <a href="https://github.com/alokk48200/alokKumar" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors">repo: alokk48200/alokKumar ↗</a>
+          <a href="https://alokk48200.github.io/alokKumar/" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors hidden sm:inline">live: alokk48200.github.io ↗</a>
+        </div>
       </div>
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-16">
+  <!-- MAIN CONTENT -->
+  <main id="top" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-24 space-y-20">
 
-    <!-- HERO SECTION -->
-    <section class="space-y-8">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/30 text-violet-300 text-xs font-mono">
-        <span>Samsung R&D Institute Bangalore</span>
-        <span>•</span>
-        <span>Senior Software Engineer</span>
-        <span>•</span>
-        <span>MNNIT Allahabad '23</span>
+    <!-- 1. HERO SECTION: TOP TECH BANNER + IDENTITY + ABOUT ME + PHOTO -->
+    <section id="about" class="space-y-8 scroll-mt-20">
+
+      <!-- TOP HIGH-IMPACT EXPERIENCE & TECH STACK BANNER -->
+      <div class="premium-card rounded-2xl p-3 sm:px-5 sm:py-3.5 border-l-4 border-l-emerald-400 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex flex-wrap items-center gap-2 font-mono text-xs sm:text-sm font-bold tracking-wide">
+          <span class="px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+            3+ YEARS OF BACKEND DEVELOPMENT
+          </span>
+          <span class="text-muted-custom hidden sm:inline">•</span>
+          <div class="flex flex-wrap items-center gap-1.5 text-xs">
+            <span class="px-2.5 py-1 rounded-md elevated-box text-cyan-300">JAVA</span>
+            <span class="px-2.5 py-1 rounded-md elevated-box text-cyan-300">GOLANG</span>
+            <span class="px-2.5 py-1 rounded-md elevated-box text-cyan-300">PYTHON</span>
+            <span class="px-2.5 py-1 rounded-md elevated-box text-violet-300">KAFKA</span>
+            <span class="px-2.5 py-1 rounded-md elevated-box text-amber-300">AGENTIC AI</span>
+            <span class="px-2.5 py-1 rounded-md elevated-box text-emerald-300">ELASTICSEARCH</span>
+            <span class="px-2.5 py-1 rounded-md elevated-box text-emerald-300">NOSQL</span>
+          </div>
+        </div>
+        <span class="font-mono text-[11px] text-muted-custom hidden lg:inline">
+          // Distributed Systems & High-Throughput Telemetry
+        </span>
       </div>
 
-      <div class="space-y-4 max-w-4xl">
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
-          Architecting High-Throughput <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-cyan-400 to-emerald-400">Distributed Telemetry</span> & Agentic AI Systems.
-        </h1>
-        <p class="text-base sm:text-lg text-slate-400 leading-relaxed max-w-3xl">
-          Senior Backend & Distributed Systems Engineer specializing in ultra-low-loss network telemetry pipelines (1-to-10 Gbps capture, 5,000+ persistent gNMI tunnels), multi-tier Elasticsearch time-series storage, and autonomous LangGraph/MCP workflows.
-        </p>
+      <!-- SPLIT HERO: LEFT IDENTITY & ABOUT ME | RIGHT PROFILE PHOTO CARD -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        
+        <!-- LEFT COLUMN (8 COLS): ALOK KUMAR, SDE2 SAMSUNG, NIT ALLAHABAD 2023 IT, RESUME LINK, ABOUT ME -->
+        <div class="lg:col-span-8 flex flex-col justify-between space-y-6">
+          <div class="space-y-5">
+            <!-- Name & Core Credentials -->
+            <div class="space-y-3">
+              <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full elevated-box text-xs font-mono">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span class="text-emerald-400 font-semibold">AVAILABLE FOR SENIOR BACKEND / DISTRIBUTED SYSTEMS ROLES</span>
+              </div>
+
+              <h1 class="text-4xl sm:text-6xl lg:text-[64px] font-extrabold tracking-tight leading-none">
+                ALOK KUMAR
+              </h1>
+
+              <!-- Role & College Sub-header -->
+              <div class="flex flex-wrap items-center gap-2.5 pt-1">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-violet-500/15 border border-violet-500/40 font-mono text-sm sm:text-base font-bold text-violet-300">
+                  <i data-lucide="award" class="w-4 h-4 text-violet-400"></i>
+                  <span>SDE 2 @ SAMSUNG</span>
+                </div>
+
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-cyan-500/15 border border-cyan-500/40 font-mono text-sm sm:text-base font-bold text-cyan-300">
+                  <i data-lucide="graduation-cap" class="w-4 h-4 text-cyan-400"></i>
+                  <span>NIT ALLAHABAD 2023 (IT)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Bar: Prominent Resume Link + Verified Profiles -->
+            <div class="flex flex-wrap items-center gap-3 pt-1">
+              <button onclick="openResumeModal()" class="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl font-mono text-xs sm:text-sm font-bold bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20">
+                <i data-lucide="file-text" class="w-4 h-4"></i>
+                <span>RESUME LINK (VIEW / PDF)</span>
+              </button>
+
+              <a href="#gnmi-topology" class="inline-flex items-center gap-2 px-4 py-3 rounded-xl font-mono text-xs font-semibold bg-gradient-to-r from-violet-600 to-cyan-600 text-white hover:from-violet-500 hover:to-cyan-500 transition-all">
+                <i data-lucide="network" class="w-4 h-4"></i>
+                <span>5,000-Device gNMI & Topology</span>
+              </a>
+
+              <a href="https://github.com/alokk48200" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-3 rounded-xl font-mono text-xs elevated-box hover:border-violet-500/50 transition-all">
+                <i data-lucide="github" class="w-4 h-4 text-violet-400"></i>
+                <span>github.com/alokk48200</span>
+              </a>
+
+              <a href="https://alokk48200.github.io/alokKumar/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-3 rounded-xl font-mono text-xs elevated-box hover:border-cyan-500/50 transition-all">
+                <i data-lucide="globe" class="w-4 h-4 text-cyan-400"></i>
+                <span>Live Site ↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- ABOUT ME CARD ("A little bit about me") -->
+          <div class="premium-card rounded-2xl p-5 sm:p-6 border-l-4 border-l-violet-500 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-violet-400">
+                <i data-lucide="user-check" class="w-4 h-4"></i>
+                <span>About Me — A Little Bit</span>
+              </div>
+              <span class="font-mono text-[11px] text-muted-custom">Bengaluru, India</span>
+            </div>
+            <p class="text-sm sm:text-base text-muted-custom leading-relaxed">
+              Hi, I'm <strong class="text-current">Alok Kumar</strong> — an <strong class="text-current">SDE 2 at Samsung R&D Institute Bangalore</strong> and a <strong class="text-current">2023 Information Technology graduate from MNNIT (NIT) Allahabad</strong> with <strong class="text-emerald-400">3+ years of backend development experience</strong>. I specialize in architecting ultra-high-throughput distributed systems using <span class="font-mono text-xs text-cyan-400">Java, Golang, Python, Kafka, Elasticsearch, and NoSQL</span>—from scaling zero-drop packet capture (<strong class="text-current">1 → 10 Gbps</strong>) and managing <strong class="text-current">5,000+ persistent gNMI device tunnels (~100 Mbps)</strong> with end-to-end Router-Switch topology graphs, to cutting database processing times by <strong class="text-current">98%</strong> and building autonomous <strong class="text-amber-300">Agentic AI (LangGraph + MCP + Ollama)</strong> workflows.
+            </p>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN (4 COLS): PHOTO OF ALOK KUMAR + LIVE PHOTO UPLOAD/PREVIEW -->
+        <div class="lg:col-span-4 premium-card rounded-2xl p-5 flex flex-col justify-between space-y-4">
+          <div class="flex items-center justify-between border-b hairline-border pb-3">
+            <div class="flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider">
+              <i data-lucide="camera" class="w-4 h-4 text-cyan-400"></i>
+              <span>profile.photo // alok</span>
+            </div>
+            <label for="photo-upload-input" class="cursor-pointer font-mono text-[11px] px-2.5 py-1 rounded-md bg-violet-500/20 text-violet-300 border border-violet-500/40 hover:bg-violet-500/30 transition-colors">
+              Swap Photo
+            </label>
+            <input id="photo-upload-input" type="file" accept="image/*" class="hidden" onchange="handleProfilePhotoUpload(event)" />
+          </div>
+
+          <!-- Framed Photo Container -->
+          <div class="relative group rounded-2xl overflow-hidden border-2 border-violet-500/30 bg-gradient-to-b from-violet-500/10 via-slate-900 to-cyan-500/10 aspect-[4/4] max-h-[290px] w-full mx-auto flex items-center justify-center">
+            <img
+              id="alok-profile-img"
+              src="https://github.com/alokk48200.png"
+              alt="Alok Kumar — SDE 2 Samsung | NIT Allahabad '23"
+              onerror="this.onerror=null; this.src='https://placehold.co/600x600/12141D/67E8F9?text=ALOK+KUMAR+%0ASDE+2+@+SAMSUNG';"
+              class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+            />
+            <!-- Subtle Bottom Identity Overlay -->
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-4">
+              <div class="font-mono text-sm font-bold text-white">ALOK KUMAR</div>
+              <div class="font-mono text-[11px] text-cyan-300">SDE 2 @ Samsung • NIT Allahabad '23</div>
+            </div>
+          </div>
+
+          <!-- Quick Telemetry & Photo Tip -->
+          <div class="space-y-2 font-mono text-xs pt-1">
+            <div class="flex justify-between py-1 border-b hairline-border">
+              <span class="text-muted-custom">Experience</span>
+              <span class="text-emerald-400 font-semibold">3+ Years Backend SDE</span>
+            </div>
+            <div class="flex justify-between py-1 border-b hairline-border">
+              <span class="text-muted-custom">Core Stack</span>
+              <span class="text-cyan-400 font-semibold text-right">Java • Go • Python • Kafka</span>
+            </div>
+            <div class="flex justify-between py-1">
+              <span class="text-muted-custom">Data & AI</span>
+              <span class="text-violet-300 font-semibold text-right">ES • NoSQL • Agentic AI</span>
+            </div>
+            <p class="text-[10px] text-muted-custom pt-1 leading-tight">
+              * Tip: Click <strong>"Swap Photo"</strong> above to preview any photo from your device, or place <code>profile.jpg</code> in your GitHub repo.
+            </p>
+          </div>
+        </div>
+
       </div>
 
-      <!-- Verified Links -->
-      <div class="flex flex-wrap items-center gap-3 pt-1">
-        <a href="https://github.com/alokk48200/alokKumar" target="_blank" rel="noopener" class="px-4 py-2.5 rounded-lg bg-violet-600 hover:bg-violet-500 text-white font-mono text-xs font-medium transition shadow-lg shadow-violet-600/20">
-          View Portfolio Repo (alokk48200/alokKumar) ↗
-        </a>
-        <a href="https://alokk48200.github.io/alokKumar/" target="_blank" rel="noopener" class="px-4 py-2.5 rounded-lg card-surface hover:border-violet-500/50 font-mono text-xs text-slate-300 transition">
-          Current Live Site ↗
-        </a>
-        <a href="#cs-gnmi" class="px-4 py-2.5 rounded-lg card-surface hover:border-cyan-500/50 font-mono text-xs text-cyan-300 transition">
-          Explore New 5,000-Device gNMI Architecture ↓
-        </a>
-      </div>
+      <!-- 4-Pillar Bento KPI Bar -->
+      <div id="impact" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="premium-card rounded-xl p-5 border-l-2 border-l-cyan-400 flex flex-col justify-between">
+          <div class="flex items-center justify-between text-xs font-mono text-muted-custom">
+            <span>PERSISTENT gNMI FLEET</span>
+            <i data-lucide="radio" class="w-4 h-4 text-cyan-400"></i>
+          </div>
+          <div class="my-2.5">
+            <div class="font-mono text-2xl sm:text-3xl font-bold text-cyan-400">5,000+ Devices</div>
+            <p class="text-xs text-muted-custom mt-1">~100 Mbps streaming across 16 tunnel & interface metrics into Tier-0/1 ES & Topology UI.</p>
+          </div>
+          <div class="text-[11px] font-mono text-cyan-300/90 pt-2 border-t hairline-border">
+            Clubbed Router ↔ Switch Link Graph
+          </div>
+        </div>
 
-      <!-- 4-Pillar Bento KPI Strip -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-        <div class="card-surface p-5 rounded-xl space-y-1.5 border-l-2 border-l-violet-500">
-          <div class="text-xs font-mono text-slate-400 uppercase">Packet Capture Scale</div>
-          <div class="text-2xl sm:text-3xl font-bold font-mono text-white">1 → 10 Gbps</div>
-          <p class="text-xs text-slate-400">Zero-packet-loss ingestion with Kafka device caching & ES indexing.</p>
+        <div class="premium-card rounded-xl p-5 border-l-2 border-l-emerald-400 flex flex-col justify-between">
+          <div class="flex items-center justify-between text-xs font-mono text-muted-custom">
+            <span>LINE-RATE CAPTURE</span>
+            <i data-lucide="gauge" class="w-4 h-4 text-emerald-400"></i>
+          </div>
+          <div class="my-2.5">
+            <div class="font-mono text-2xl sm:text-3xl font-bold text-emerald-400">1 → 10 Gbps</div>
+            <p class="text-xs text-muted-custom mt-1">10x traffic capture scaling with zero packet loss via Go, Kafka & Elasticsearch.</p>
+          </div>
+          <div class="text-[11px] font-mono text-emerald-400/90 pt-2 border-t hairline-border">
+            0.00% Packet Loss Under Burst Load
+          </div>
         </div>
-        <div class="card-surface p-5 rounded-xl space-y-1.5 border-l-2 border-l-cyan-500">
-          <div class="text-xs font-mono text-slate-400 uppercase">Persistent gNMI Fleet</div>
-          <div class="text-2xl sm:text-3xl font-bold font-mono text-cyan-400">5,000+ Devices</div>
-          <p class="text-xs text-slate-400">~100 Mbps streaming across 16 tunnel & interface metrics into Tier-0/1 ES.</p>
+
+        <div class="premium-card rounded-xl p-5 border-l-2 border-l-violet-400 flex flex-col justify-between">
+          <div class="flex items-center justify-between text-xs font-mono text-muted-custom">
+            <span>DATA ENGINE LATENCY</span>
+            <i data-lucide="zap" class="w-4 h-4 text-violet-400"></i>
+          </div>
+          <div class="my-2.5">
+            <div class="font-mono text-2xl sm:text-3xl font-bold text-violet-400">-98% Time</div>
+            <p class="text-xs text-muted-custom mt-1">Compiled PostgreSQL stored procedures & composite indexing eliminating N+1 queries.</p>
+          </div>
+          <div class="text-[11px] font-mono text-violet-300/90 pt-2 border-t hairline-border">
+            O(N) Roundtrips Reduced to O(1)
+          </div>
         </div>
-        <div class="card-surface p-5 rounded-xl space-y-1.5 border-l-2 border-l-emerald-500">
-          <div class="text-xs font-mono text-slate-400 uppercase">Query & Procedure Optimization</div>
-          <div class="text-2xl sm:text-3xl font-bold font-mono text-emerald-400">-98% Latency</div>
-          <p class="text-xs text-slate-400">PostgreSQL stored procedures eliminating N+1 network roundtrips.</p>
-        </div>
-        <div class="card-surface p-5 rounded-xl space-y-1.5 border-l-2 border-l-amber-500">
-          <div class="text-xs font-mono text-slate-400 uppercase">Autonomous Workflows</div>
-          <div class="text-2xl sm:text-3xl font-bold font-mono text-amber-300">MCP + LangGraph</div>
-          <p class="text-xs text-slate-400">Stateful multi-agent orchestration backed by local Ollama LLMs.</p>
+
+        <div class="premium-card rounded-xl p-5 border-l-2 border-l-amber-400 flex flex-col justify-between">
+          <div class="flex items-center justify-between text-xs font-mono text-muted-custom">
+            <span>AGENTIC AI SYSTEMS</span>
+            <i data-lucide="bot" class="w-4 h-4 text-amber-400"></i>
+          </div>
+          <div class="my-2.5">
+            <div class="font-mono text-2xl sm:text-3xl font-bold text-amber-300">MCP + LangGraph</div>
+            <p class="text-xs text-muted-custom mt-1">Autonomous multi-agent diagnostics powered by Model Context Protocol & local Ollama.</p>
+          </div>
+          <div class="text-[11px] font-mono text-amber-300/90 pt-2 border-t hairline-border">
+            100% On-Premise Privacy-Preserving AI
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ================================================================= -->
-    <!-- NEW FEATURED CASE STUDY: CS-01 gNMI 5,000-DEVICE TELEMETRY & TOPOLOGY -->
-    <!-- ================================================================= -->
-    <section id="cs-gnmi" class="space-y-6 scroll-mt-20">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-800 pb-4">
+    <!-- ======================================================================= -->
+    <!-- 2. FEATURED CASE STUDY (CS-01): 5,000-DEVICE gNMI & TOPOLOGY VISUALIZER -->
+    <!-- ======================================================================= -->
+    <section id="gnmi-topology" class="space-y-6 scroll-mt-20">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b hairline-border pb-4">
         <div>
-          <div class="text-xs font-mono text-cyan-400 uppercase tracking-wider">Featured System Architecture • CS-01 (New Addition)</div>
-          <h2 class="text-2xl sm:text-3xl font-bold mt-1">gNMI Tunnel Protocol Engine & Clubbed Router-Switch Topology Visualizer</h2>
+          <div class="font-mono text-xs text-cyan-400 uppercase tracking-widest mb-1">// 02. Featured Architecture • CS-01 (New Vendor Onboarding)</div>
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">5,000-Device gNMI Tunnel Telemetry & Clubbed Router-Switch Topology Engine</h2>
         </div>
-        <div class="flex gap-2 font-mono text-xs">
-          <span class="px-2.5 py-1 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">gNMI / gRPC</span>
-          <span class="px-2.5 py-1 rounded bg-violet-500/10 text-violet-300 border border-violet-500/30">Kafka</span>
-          <span class="px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">Elasticsearch Tier 0/1</span>
-        </div>
-      </div>
-
-      <!-- Mode-Adaptive Summary Banner -->
-      <div class="card-surface rounded-xl p-5 space-y-3">
-        <div class="recruiter-block">
-          <span class="text-xs font-mono uppercase px-2 py-0.5 rounded bg-violet-500/20 text-violet-300">Executive Impact</span>
-          <p class="text-sm text-slate-300 mt-2 leading-relaxed">
-            Engineered end-to-end onboarding for a new hardware vendor across <strong>5,000+ network devices</strong> using persistent <strong>gNMI tunnel connections</strong>. Captured <strong>~100 Mbps</strong> of continuous streaming telemetry across <strong>16 critical IPsec/interface metrics</strong>, implemented a two-tier Elasticsearch time-series storage architecture (<strong>10s Tier-0 hot store → 1m Tier-1 rollup</strong>), and delivered an interactive UI topology map resolving physical interface links between clubbed <strong>Router + Switch</strong> pairs.
-          </p>
-        </div>
-        <div class="deep-block hidden pt-2 border-t border-slate-800/80">
-          <span class="text-xs font-mono uppercase px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300">Engineering Internals</span>
-          <p class="text-xs font-mono text-slate-400 mt-2 leading-relaxed">
-            • Multiplexed long-lived gRPC/gNMI <code>Subscribe</code> streams with automated backoff & channel health checks across 5,000 endpoints.<br/>
-            • Streamed 16 YANG leaf counters per device into partitioned Kafka topics → indexed raw 10-second snapshots into Elasticsearch <strong>Tier-0</strong> indices → executed scheduled 1-minute mathematical downsampling (sum/avg/max) into <strong>Tier-1</strong> rollup indices for rapid UI charting.<br/>
-            • Resolved composite ("clubbed") Router + Switch hardware units by correlating interface descriptors & link-layer neighbor bindings, rendering 1:N breakout and 1:1 port connectivity end-to-end in the frontend graph.
-          </p>
+        <div class="flex flex-wrap gap-2 font-mono text-xs">
+          <span class="px-2.5 py-1 rounded-md bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">5,000 Persistent gNMI Clients</span>
+          <span class="px-2.5 py-1 rounded-md bg-violet-500/15 text-violet-300 border border-violet-500/30">~100 Mbps / 16 Terms</span>
+          <span class="px-2.5 py-1 rounded-md bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">Tier-0 (10s) → Tier-1 (1m)</span>
         </div>
       </div>
 
-      <!-- Interactive 2-Column Workspace: Left = Clubbed Topology SVG (From User Diagram), Right = 16-Term Inspector & Tier-0/1 Switcher -->
+      <!-- Mode-Adaptive Executive vs Deep-Dive Context -->
+      <div class="premium-card rounded-2xl p-5 space-y-3">
+        <div class="recruiter-only">
+          <div class="font-mono text-xs text-emerald-400 uppercase font-semibold mb-1">Executive & Product Impact</div>
+          <p class="text-xs sm:text-sm text-muted-custom leading-relaxed">
+            Built end-to-end support for a new hardware vendor across <strong>5,000+ devices</strong> using persistent <strong>gNMI tunnel connections</strong>. Continuously streamed <strong>~100 Mbps</strong> across <strong>16 tunnel & interface telemetry counters</strong> into Apache Kafka, stored 10-second hot statistics in <strong>Elasticsearch Tier-0</strong> with automated 1-minute rollups into <strong>Tier-1</strong>, and delivered an interactive UI topology map resolving physical interface connectivity between clubbed <strong>Router + Switch</strong> devices.
+          </p>
+        </div>
+        <div class="deepdive-only">
+          <div class="font-mono text-xs text-cyan-400 uppercase font-semibold mb-1">Engineering Architecture & Data Flow Internals</div>
+          <p class="text-xs font-mono text-muted-custom leading-relaxed">
+            • <strong>Persistent gNMI Tunnel Multiplexing:</strong> Long-lived gRPC/gNMI <code>Subscribe</code> sessions across 5,000 devices streaming 16 YANG leaf counters (active tunnels, IKE gateway negotiation, packet/byte RX/TX/drops) at ~100 Mbps aggregate ingress.<br/>
+            • <strong>Multi-Tier Time-Series Rollup:</strong> Kafka consumers flush 10-second statistical windows into <strong>Elasticsearch Tier-0</strong> hot indices, while a rollup aggregation pipeline converts 10s buckets into 1-minute <strong>Tier-1</strong> indices for sub-second historical UI charting.<br/>
+            • <strong>Clubbed Hardware Topology Resolution:</strong> Correlated interface descriptors across composite Router + Switch vendor units to map 1:2 breakout links (<code>ge-0/0/0 → sw-eth1, sw-eth2</code>) and 1:1 uplinks (<code>ge-0/0/1 → sw-eth3</code>, <code>ge-0/0/2 → sw-eth4</code>) end-to-end in the UI.
+          </p>
+        </div>
+      </div>
+
+      <!-- Interactive 2-Column Workspace: Left = Clubbed Topology SVG (From User Diagram), Right = 16-Term Inspector -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <!-- LEFT 7 COLS: Interactive Clubbed Router + Switch Topology (Matches Uploaded Diagram) -->
-        <div class="lg:col-span-7 card-surface rounded-xl p-5 flex flex-col justify-between space-y-4">
-          <div class="flex items-center justify-between">
+        <!-- LEFT 7 COLS: Interactive SVG Recreation of the Clubbed Router + Switch Diagram -->
+        <div class="lg:col-span-7 premium-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
             <div>
-              <h3 class="text-sm font-semibold text-white flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-violet-400"></span>
-                Clubbed Vendor Device: Router ↔ Switch Interface Link Graph
+              <h3 class="text-sm sm:text-base font-bold flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-violet-400 animate-pulse"></span>
+                <span>UI Graphical Topology: Clubbed Router ↔ Switch Links</span>
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Click any interface link below to inspect its real-time 16-term gNMI telemetry & port binding.</p>
+              <p class="text-xs text-muted-custom mt-0.5">Click any interface box or purple/cyan connection line to inspect live link telemetry.</p>
             </div>
-            <span id="selected-link-badge" class="text-xs font-mono px-2.5 py-1 rounded bg-violet-500/20 text-violet-300 border border-violet-500/40">
-              Link: R-IF1 → SW-P1
+            <span id="selected-link-badge" class="font-mono text-xs px-3 py-1 rounded-lg bg-cyan-500/15 text-cyan-300 border border-cyan-500/40 font-semibold">
+              Active: ge-0/0/0 ↔ sw-eth1
             </span>
           </div>
 
-          <!-- SVG Recreation of the User's Purple Clubbed Topology Diagram -->
-          <div class="relative bg-obsidian/90 rounded-lg border border-slate-800/90 p-4 flex items-center justify-center">
-            <svg viewBox="0 0 600 320" class="w-full h-auto max-h-[300px] select-none">
+          <!-- Interactive SVG Canvas matching the uploaded diagram -->
+          <div class="relative rounded-xl bg-[#07080D] border hairline-border p-4 flex items-center justify-center">
+            <svg viewBox="0 0 620 330" class="w-full h-auto max-h-[310px] select-none" aria-label="Clubbed Router and Switch Interface Connectivity Diagram">
               <defs>
-                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="3" result="blur" />
+                <filter id="cyanGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="3.5" result="blur" />
                   <feComposite in="SourceGraphic" in2="blur" operator="over" />
                 </filter>
               </defs>
 
-              <!-- TOP CONTAINER: ROUTER UNIT -->
-              <rect x="95" y="18" width="410" height="92" rx="18" fill="rgba(139, 92, 246, 0.06)" stroke="#8B5CF6" stroke-width="2" />
-              <text x="115" y="38" fill="#A78BFA" font-family="JetBrains Mono" font-size="11" font-weight="600">ROUTER MODULE (Control & WAN Tunnel Termination)</text>
+              <!-- TOP ROUNDED CONTAINER: ROUTER MODULE -->
+              <rect x="95" y="16" width="430" height="96" rx="22" fill="rgba(139, 92, 246, 0.06)" stroke="#8B5CF6" stroke-width="2" />
+              <text x="118" y="37" fill="#C4B5FD" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">
+                ROUTER DEVICE (WAN / IPsec Tunnel Termination)
+              </text>
 
-              <!-- Router Interface 1 (Splits into 2 Switch Interfaces) -->
+              <!-- Router Interface 1 (Left - splits into 2 links to Switch Port 1 & Port 2) -->
               <g class="cursor-pointer" onclick="selectTopologyLink(0)">
-                <rect id="node-r1" x="135" y="48" width="64" height="46" rx="10" fill="#12141D" stroke="#8B5CF6" stroke-width="2" />
-                <text x="167" y="70" text-anchor="middle" fill="#F3F4F6" font-family="JetBrains Mono" font-size="11" font-weight="600">ge-0/0/0</text>
-                <text x="167" y="84" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono" font-size="9">1:2 Breakout</text>
+                <rect id="svg-r1" x="135" y="48" width="68" height="48" rx="11" fill="#12141D" stroke="#06B6D4" stroke-width="2.2" />
+                <text x="169" y="70" text-anchor="middle" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">ge-0/0/0</text>
+                <text x="169" y="85" text-anchor="middle" fill="#67E8F9" font-family="JetBrains Mono, monospace" font-size="9">1:2 Breakout</text>
               </g>
 
-              <!-- Router Interface 2 -->
+              <!-- Router Interface 2 (Middle - connects to Switch Port 3) -->
               <g class="cursor-pointer" onclick="selectTopologyLink(2)">
-                <rect id="node-r2" x="255" y="48" width="64" height="46" rx="10" fill="#12141D" stroke="#8B5CF6" stroke-width="2" />
-                <text x="287" y="70" text-anchor="middle" fill="#F3F4F6" font-family="JetBrains Mono" font-size="11" font-weight="600">ge-0/0/1</text>
-                <text x="287" y="84" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono" font-size="9">Uplink B</text>
+                <rect id="svg-r2" x="260" y="48" width="68" height="48" rx="11" fill="#12141D" stroke="#8B5CF6" stroke-width="2" />
+                <text x="294" y="70" text-anchor="middle" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">ge-0/0/1</text>
+                <text x="294" y="85" text-anchor="middle" fill="#A78BFA" font-family="JetBrains Mono, monospace" font-size="9">Tunnel-B</text>
               </g>
 
-              <!-- Router Interface 3 -->
+              <!-- Router Interface 3 (Right - connects to Switch Port 4) -->
               <g class="cursor-pointer" onclick="selectTopologyLink(3)">
-                <rect id="node-r3" x="395" y="48" width="64" height="46" rx="10" fill="#12141D" stroke="#8B5CF6" stroke-width="2" />
-                <text x="427" y="70" text-anchor="middle" fill="#F3F4F6" font-family="JetBrains Mono" font-size="11" font-weight="600">ge-0/0/2</text>
-                <text x="427" y="84" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono" font-size="9">Uplink C</text>
+                <rect id="svg-r3" x="400" y="48" width="68" height="48" rx="11" fill="#12141D" stroke="#8B5CF6" stroke-width="2" />
+                <text x="434" y="70" text-anchor="middle" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">ge-0/0/2</text>
+                <text x="434" y="85" text-anchor="middle" fill="#A78BFA" font-family="JetBrains Mono, monospace" font-size="9">Tunnel-C</text>
               </g>
 
-              <!-- BOTTOM CONTAINER: SWITCH UNIT -->
-              <rect x="25" y="195" width="550" height="105" rx="20" fill="rgba(6, 182, 212, 0.05)" stroke="#8B5CF6" stroke-width="2" />
-              <text x="48" y="218" fill="#67E8F9" font-family="JetBrains Mono" font-size="11" font-weight="600">SWITCH MODULE (L2/L3 Fabric & Port Aggregation)</text>
+              <!-- BOTTOM ROUNDED CONTAINER: SWITCH MODULE -->
+              <rect x="20" y="202" width="580" height="108" rx="24" fill="rgba(6, 182, 212, 0.04)" stroke="#8B5CF6" stroke-width="2" />
+              <text x="45" y="224" fill="#67E8F9" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">
+                SWITCH DEVICE (Clubbed L2/L3 Interface Distribution Matrix)
+              </text>
 
-              <!-- Switch Port 1 -->
+              <!-- Switch Interface 1 -->
               <g class="cursor-pointer" onclick="selectTopologyLink(0)">
-                <rect id="node-s1" x="70" y="232" width="68" height="48" rx="10" fill="#12141D" stroke="#8B5CF6" stroke-width="2" />
-                <text x="104" y="255" text-anchor="middle" fill="#F3F4F6" font-family="JetBrains Mono" font-size="11" font-weight="600">sw-eth1</text>
-                <text x="104" y="269" text-anchor="middle" fill="#10B981" font-family="JetBrains Mono" font-size="9">ACTIVE</text>
+                <rect id="svg-s1" x="68" y="240" width="72" height="50" rx="11" fill="#12141D" stroke="#06B6D4" stroke-width="2.2" />
+                <text x="104" y="263" text-anchor="middle" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">sw-eth1</text>
+                <text x="104" y="278" text-anchor="middle" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="9">LINK UP</text>
               </g>
 
-              <!-- Switch Port 2 -->
+              <!-- Switch Interface 2 -->
               <g class="cursor-pointer" onclick="selectTopologyLink(1)">
-                <rect id="node-s2" x="185" y="236" width="68" height="48" rx="10" fill="#12141D" stroke="#8B5CF6" stroke-width="2" />
-                <text x="219" y="259" text-anchor="middle" fill="#F3F4F6" font-family="JetBrains Mono" font-size="11" font-weight="600">sw-eth2</text>
-                <text x="219" y="273" text-anchor="middle" fill="#10B981" font-family="JetBrains Mono" font-size="9">ACTIVE</text>
+                <rect id="svg-s2" x="190" y="244" width="72" height="50" rx="11" fill="#12141D" stroke="#8B5CF6" stroke-width="2" />
+                <text x="226" y="267" text-anchor="middle" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">sw-eth2</text>
+                <text x="226" y="282" text-anchor="middle" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="9">LINK UP</text>
               </g>
 
-              <!-- Switch Port 3 -->
+              <!-- Switch Interface 3 -->
               <g class="cursor-pointer" onclick="selectTopologyLink(2)">
-                <rect id="node-s3" x="305" y="232" width="68" height="48" rx="10" fill="#12141D" stroke="#8B5CF6" stroke-width="2" />
-                <text x="339" y="255" text-anchor="middle" fill="#F3F4F6" font-family="JetBrains Mono" font-size="11" font-weight="600">sw-eth3</text>
-                <text x="339" y="269" text-anchor="middle" fill="#10B981" font-family="JetBrains Mono" font-size="9">ACTIVE</text>
+                <rect id="svg-s3" x="315" y="240" width="72" height="50" rx="11" fill="#12141D" stroke="#8B5CF6" stroke-width="2" />
+                <text x="351" y="263" text-anchor="middle" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">sw-eth3</text>
+                <text x="351" y="278" text-anchor="middle" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="9">LINK UP</text>
               </g>
 
-              <!-- Switch Port 4 -->
+              <!-- Switch Interface 4 -->
               <g class="cursor-pointer" onclick="selectTopologyLink(3)">
-                <rect id="node-s4" x="425" y="232" width="68" height="48" rx="10" fill="#12141D" stroke="#8B5CF6" stroke-width="2" />
-                <text x="459" y="255" text-anchor="middle" fill="#F3F4F6" font-family="JetBrains Mono" font-size="11" font-weight="600">sw-eth4</text>
-                <text x="459" y="269" text-anchor="middle" fill="#10B981" font-family="JetBrains Mono" font-size="9">ACTIVE</text>
+                <rect id="svg-s4" x="440" y="240" width="72" height="50" rx="11" fill="#12141D" stroke="#8B5CF6" stroke-width="2" />
+                <text x="476" y="263" text-anchor="middle" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">sw-eth4</text>
+                <text x="476" y="278" text-anchor="middle" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="9">LINK UP</text>
               </g>
 
-              <!-- 4 INTER-DEVICE INTERFACE LINKS (Exactly matching the user's diagram) -->
-              <!-- Link 0: Router IF-1 (left) -> Switch Port 1 -->
-              <line id="link-0" onclick="selectTopologyLink(0)" x1="155" y1="94" x2="104" y2="232" stroke="#06B6D4" stroke-width="3" class="cursor-pointer animated-link" filter="url(#glow)" />
-              <!-- Link 1: Router IF-1 (right) -> Switch Port 2 -->
-              <line id="link-1" onclick="selectTopologyLink(1)" x1="180" y1="94" x2="219" y2="236" stroke="#8B5CF6" stroke-width="2" class="cursor-pointer hover:stroke-cyan-400 transition" />
-              <!-- Link 2: Router IF-2 -> Switch Port 3 -->
-              <line id="link-2" onclick="selectTopologyLink(2)" x1="287" y1="94" x2="339" y2="232" stroke="#8B5CF6" stroke-width="2" class="cursor-pointer hover:stroke-cyan-400 transition" />
-              <!-- Link 3: Router IF-3 -> Switch Port 4 -->
-              <line id="link-3" onclick="selectTopologyLink(3)" x1="427" y1="94" x2="459" y2="232" stroke="#8B5CF6" stroke-width="2" class="cursor-pointer hover:stroke-cyan-400 transition" />
+              <!-- 4 END-TO-END INTERFACE CONNECTIVITY LINES (Matching User Diagram) -->
+              <!-- Line 0: Router Box 1 (left edge) -> Switch Box 1 -->
+              <line id="topo-line-0" onclick="selectTopologyLink(0)" x1="156" y1="96" x2="104" y2="240" stroke="#06B6D4" stroke-width="3.2" class="cursor-pointer animated-link" filter="url(#cyanGlow)" />
+              <!-- Line 1: Router Box 1 (right edge) -> Switch Box 2 -->
+              <line id="topo-line-1" onclick="selectTopologyLink(1)" x1="184" y1="96" x2="226" y2="244" stroke="#8B5CF6" stroke-width="2.2" class="cursor-pointer hover:stroke-cyan-400 transition-all" />
+              <!-- Line 2: Router Box 2 -> Switch Box 3 -->
+              <line id="topo-line-2" onclick="selectTopologyLink(2)" x1="294" y1="96" x2="351" y2="240" stroke="#8B5CF6" stroke-width="2.2" class="cursor-pointer hover:stroke-cyan-400 transition-all" />
+              <!-- Line 3: Router Box 3 -> Switch Box 4 -->
+              <line id="topo-line-3" onclick="selectTopologyLink(3)" x1="434" y1="96" x2="476" y2="240" stroke="#8B5CF6" stroke-width="2.2" class="cursor-pointer hover:stroke-cyan-400 transition-all" />
             </svg>
           </div>
 
-          <!-- Link Selection Quick Buttons -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono">
-            <button onclick="selectTopologyLink(0)" id="link-btn-0" class="p-2 rounded border border-cyan-500/60 bg-cyan-500/10 text-cyan-300 text-left">
-              <div class="font-semibold">Link #1 (Breakout A)</div>
-              <div class="text-[10px] text-slate-400">ge-0/0/0 ↔ sw-eth1</div>
+          <!-- 4 Interactive Link Selector Pills -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 font-mono text-xs">
+            <button onclick="selectTopologyLink(0)" id="topo-btn-0" class="p-2.5 rounded-xl border-2 border-cyan-500 bg-cyan-500/10 text-cyan-300 text-left transition-all">
+              <div class="font-bold">Link 01 • Breakout A</div>
+              <div class="text-[10px] text-muted-custom mt-0.5">ge-0/0/0 → sw-eth1</div>
             </button>
-            <button onclick="selectTopologyLink(1)" id="link-btn-1" class="p-2 rounded border border-slate-800 bg-slate-900/60 text-slate-300 text-left hover:border-violet-500/40">
-              <div class="font-semibold">Link #2 (Breakout B)</div>
-              <div class="text-[10px] text-slate-400">ge-0/0/0 ↔ sw-eth2</div>
+            <button onclick="selectTopologyLink(1)" id="topo-btn-1" class="p-2.5 rounded-xl elevated-box hover:border-violet-500/50 text-left transition-all">
+              <div class="font-bold">Link 02 • Breakout B</div>
+              <div class="text-[10px] text-muted-custom mt-0.5">ge-0/0/0 → sw-eth2</div>
             </button>
-            <button onclick="selectTopologyLink(2)" id="link-btn-2" class="p-2 rounded border border-slate-800 bg-slate-900/60 text-slate-300 text-left hover:border-violet-500/40">
-              <div class="font-semibold">Link #3 (Direct)</div>
-              <div class="text-[10px] text-slate-400">ge-0/0/1 ↔ sw-eth3</div>
+            <button onclick="selectTopologyLink(2)" id="topo-btn-2" class="p-2.5 rounded-xl elevated-box hover:border-violet-500/50 text-left transition-all">
+              <div class="font-bold">Link 03 • Direct</div>
+              <div class="text-[10px] text-muted-custom mt-0.5">ge-0/0/1 → sw-eth3</div>
             </button>
-            <button onclick="selectTopologyLink(3)" id="link-btn-3" class="p-2 rounded border border-slate-800 bg-slate-900/60 text-slate-300 text-left hover:border-violet-500/40">
-              <div class="font-semibold">Link #4 (Direct)</div>
-              <div class="text-[10px] text-slate-400">ge-0/0/2 ↔ sw-eth4</div>
+            <button onclick="selectTopologyLink(3)" id="topo-btn-3" class="p-2.5 rounded-xl elevated-box hover:border-violet-500/50 text-left transition-all">
+              <div class="font-bold">Link 04 • Direct</div>
+              <div class="text-[10px] text-muted-custom mt-0.5">ge-0/0/2 → sw-eth4</div>
             </button>
           </div>
         </div>
 
-        <!-- RIGHT 5 COLS: 16 Telemetry Terms & Tier-0 (10s) vs Tier-1 (1m) Inspector -->
-        <div class="lg:col-span-5 card-surface rounded-xl p-5 flex flex-col justify-between space-y-4">
+        <!-- RIGHT 5 COLS: 16 Streamed gNMI Telemetry Terms + Tier-0 (10s) vs Tier-1 (1m) Toggle -->
+        <div class="lg:col-span-5 premium-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between space-y-4">
           <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-mono text-emerald-400 uppercase">16 Streamed gNMI Metrics</span>
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b hairline-border pb-3">
+              <div>
+                <span class="font-mono text-xs font-bold uppercase text-emerald-400">16 gNMI Telemetry Terms</span>
+                <div class="text-[11px] font-mono text-muted-custom">Streamed @ ~100 Mbps across 5,000 devices</div>
+              </div>
+
               <!-- Tier 0 vs Tier 1 Storage Switcher -->
-              <div class="inline-flex rounded-lg bg-slate-900 p-0.5 border border-slate-800 text-[11px] font-mono">
-                <button id="tier0-btn" onclick="setStorageTier('tier0')" class="px-2 py-1 rounded bg-emerald-600 text-white font-medium transition">
-                  Tier-0 (10s Raw)
+              <div class="elevated-box p-1 rounded-lg flex items-center font-mono text-[11px]">
+                <button id="btn-tier0" onclick="setStorageTier('tier0')" class="px-2.5 py-1 rounded bg-emerald-500 text-slate-950 font-bold transition-all">
+                  Tier-0 (10s)
                 </button>
-                <button id="tier1-btn" onclick="setStorageTier('tier1')" class="px-2 py-1 rounded text-slate-400 hover:text-white transition">
-                  Tier-1 (1m Rollup)
+                <button id="btn-tier1" onclick="setStorageTier('tier1')" class="px-2.5 py-1 rounded text-muted-custom hover:text-current transition-all">
+                  Tier-1 (1m)
                 </button>
               </div>
             </div>
 
-            <p id="tier-description" class="text-xs text-slate-400 font-mono">
-              Showing <strong>Tier-0 Hot Index (10-second interval)</strong> raw gNMI telemetry pushed via Kafka for real-time interface diagnostics.
+            <p id="tier-status-banner" class="text-xs font-mono text-muted-custom leading-relaxed">
+              <strong class="text-emerald-400">Tier-0 Elasticsearch (10s Statistics):</strong> High-resolution streaming counters ingested directly from Kafka for live tunnel & link-state monitoring.
             </p>
 
             <!-- 16 Telemetry Terms Grid -->
-            <div id="telemetry-terms-grid" class="grid grid-cols-2 gap-2 max-h-[310px] overflow-y-auto pr-1 text-xs font-mono">
+            <div id="gnmi-terms-grid" class="grid grid-cols-2 gap-2 max-h-[305px] overflow-y-auto pr-1 font-mono text-xs">
               <!-- Populated dynamically via JS -->
             </div>
           </div>
 
-          <!-- Pipeline Summary Footer inside Card -->
-          <div class="pt-3 border-t border-slate-800/90 flex items-center justify-between text-[11px] font-mono text-slate-400">
-            <span>Fleet: <strong class="text-white">5,000 Devices</strong></span>
-            <span>Ingress: <strong class="text-cyan-400">~100 Mbps</strong></span>
-            <span>Terms: <strong class="text-violet-400">16 Leaves/Msg</strong></span>
+          <div class="pt-3 border-t hairline-border flex items-center justify-between font-mono text-[11px] text-muted-custom">
+            <span>Protocol: <strong class="text-cyan-400">gNMI Tunnel</strong></span>
+            <span>Bus: <strong class="text-violet-400">Kafka</strong></span>
+            <span>Rollup: <strong class="text-emerald-400">10s → 60s ES</strong></span>
           </div>
         </div>
-
       </div>
 
-      <!-- 4-Stage End-to-End Pipeline Flow -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-3 pt-2">
-        <div class="card-surface p-4 rounded-xl border-t-2 border-t-violet-500">
-          <div class="text-[11px] font-mono text-violet-400">STAGE 01 // COLLECTOR</div>
-          <div class="font-semibold text-sm mt-1">Persistent gNMI Client</div>
-          <p class="text-xs text-slate-400 mt-1">Maintains 5,000 persistent tunnel sessions streaming 16 tunnel/interface metrics at ~100 Mbps.</p>
-        </div>
-        <div class="card-surface p-4 rounded-xl border-t-2 border-t-cyan-500">
-          <div class="text-[11px] font-mono text-cyan-400">STAGE 02 // MESSAGE BUS</div>
-          <div class="font-semibold text-sm mt-1">Apache Kafka Stream</div>
-          <p class="text-xs text-slate-400 mt-1">Decouples high-frequency gNMI <code>SubscribeResponse</code> bursts with device-ID partition keys.</p>
-        </div>
-        <div class="card-surface p-4 rounded-xl border-t-2 border-t-emerald-500">
-          <div class="text-[11px] font-mono text-emerald-400">STAGE 03 // MULTI-TIER ES</div>
-          <div class="font-semibold text-sm mt-1">Tier-0 (10s) → Tier-1 (1m)</div>
-          <p class="text-xs text-slate-400 mt-1">Stores 10-second statistical snapshots in Tier-0 and aggregates 1-minute rollups into Tier-1.</p>
-        </div>
-        <div class="card-surface p-4 rounded-xl border-t-2 border-t-amber-500">
-          <div class="text-[11px] font-mono text-amber-400">STAGE 04 // UI LAYER</div>
-          <div class="font-semibold text-sm mt-1">Graphical Topology & Charts</div>
-          <p class="text-xs text-slate-400 mt-1">Renders time-series telemetry and maps end-to-end Router ↔ Switch port connectivity.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================================================= -->
-    <!-- EXISTING CORE CASE STUDIES (10 Gbps Capture, 98% SQL, Agentic AI) -->
-    <!-- ================================================================= -->
-    <section class="space-y-6">
-      <div class="border-b border-slate-800 pb-4">
-        <div class="text-xs font-mono text-violet-400 uppercase tracking-wider">Core Production Systems • CS-02 to CS-04</div>
-        <h2 class="text-2xl sm:text-3xl font-bold mt-1">High-Speed Packet Capture, Database Optimization & Agentic AI</h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- CS-02: 1 to 10 Gbps -->
-        <div class="card-surface rounded-xl p-6 flex flex-col justify-between space-y-4">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between text-xs font-mono">
-              <span class="text-violet-400">CS-02 // NETWORK INGESTION</span>
-              <span class="px-2 py-0.5 rounded bg-violet-500/10 text-violet-300">1 → 10 Gbps</span>
-            </div>
-            <h3 class="text-lg font-bold">Zero-Packet-Loss 10 Gbps Capture Pipeline</h3>
-            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              Scaled real-time network traffic capture 10x from 1 Gbps to 10 Gbps without packet drops by decoupling packet parsing from storage using distributed Kafka consumers, in-memory device status caching, and bulk Elasticsearch metadata indexing.
-            </p>
-            <div class="deep-block hidden pt-2 border-t border-slate-800 text-xs font-mono text-slate-400 space-y-1">
-              <div>• Lock-free ring buffer ingestion + concurrent Go worker pools</div>
-              <div>• Kafka consumer group batching with asynchronous ES <code>_bulk</code> flush</div>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-1.5 pt-2 font-mono text-[11px] text-slate-300">
-            <span class="px-2 py-0.5 rounded bg-slate-800">Golang</span>
-            <span class="px-2 py-0.5 rounded bg-slate-800">Java</span>
-            <span class="px-2 py-0.5 rounded bg-slate-800">Kafka</span>
-            <span class="px-2 py-0.5 rounded bg-slate-800">Elasticsearch</span>
-          </div>
+      <!-- 4-Stage gNMI End-to-End Pipeline Flow -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="premium-card p-4 rounded-xl border-t-2 border-t-cyan-400 space-y-1.5">
+          <div class="font-mono text-[11px] text-cyan-400 font-semibold">STAGE 01 // PERSISTENT gNMI CLIENT</div>
+          <div class="font-bold text-sm">5,000+ Vendor Device Tunnels</div>
+          <p class="text-xs text-muted-custom leading-relaxed">Establishes persistent gNMI tunnel connections across 5,000 devices, continuously streaming 16 telemetry terms at ~100 Mbps.</p>
         </div>
 
-        <!-- CS-03: 98% Latency Reduction -->
-        <div class="card-surface rounded-xl p-6 flex flex-col justify-between space-y-4">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between text-xs font-mono">
-              <span class="text-emerald-400">CS-03 // DATA LAYER</span>
-              <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300">-98% Time</span>
-            </div>
-            <h3 class="text-lg font-bold">98% Processing Time Reduction via DB Engine</h3>
-            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              Eliminated heavy application-side iterative queries and network serialization overhead by shifting complex relational data reconciliation into compiled PostgreSQL stored procedures with composite indexing.
-            </p>
-            <div class="deep-block hidden pt-2 border-t border-slate-800 text-xs font-mono text-slate-400 space-y-1">
-              <div>• Replaced N+1 ORM roundtrips with set-based PL/pgSQL procedures</div>
-              <div>• Cut batch execution window by 98% under peak concurrency</div>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-1.5 pt-2 font-mono text-[11px] text-slate-300">
-            <span class="px-2 py-0.5 rounded bg-slate-800">PostgreSQL</span>
-            <span class="px-2 py-0.5 rounded bg-slate-800">PL/pgSQL</span>
-            <span class="px-2 py-0.5 rounded bg-slate-800">Spring Boot</span>
-          </div>
+        <div class="premium-card p-4 rounded-xl border-t-2 border-t-violet-400 space-y-1.5">
+          <div class="font-mono text-[11px] text-violet-400 font-semibold">STAGE 02 // STREAM BUFFERING</div>
+          <div class="font-bold text-sm">Apache Kafka Partitioned Bus</div>
+          <p class="text-xs text-muted-custom leading-relaxed">Ingests high-frequency gNMI telemetry frames into partitioned Kafka topics with zero backpressure stalls.</p>
         </div>
 
-        <!-- CS-04: Agentic AI -->
-        <div class="card-surface rounded-xl p-6 flex flex-col justify-between space-y-4">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between text-xs font-mono">
-              <span class="text-amber-400">CS-04 // AGENTIC AI</span>
-              <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-300">MCP + LangGraph</span>
-            </div>
-            <h3 class="text-lg font-bold">Local-First Agentic AI & MCP Orchestration</h3>
-            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              Designed stateful multi-agent workflows using LangGraph and standardized Model Context Protocol (MCP) tool servers, backed by local Ollama LLMs for privacy-preserving engineering automation and diagnostics.
-            </p>
-            <div class="deep-block hidden pt-2 border-t border-slate-800 text-xs font-mono text-slate-400 space-y-1">
-              <div>• Directed cyclic graph state machines with deterministic tool calling</div>
-              <div>• Zero external token leakage via local Ollama inference endpoints</div>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-1.5 pt-2 font-mono text-[11px] text-slate-300">
-            <span class="px-2 py-0.5 rounded bg-slate-800">LangGraph</span>
-            <span class="px-2 py-0.5 rounded bg-slate-800">MCP</span>
-            <span class="px-2 py-0.5 rounded bg-slate-800">Ollama</span>
-            <span class="px-2 py-0.5 rounded bg-slate-800">Kubernetes</span>
-          </div>
+        <div class="premium-card p-4 rounded-xl border-t-2 border-t-emerald-400 space-y-1.5">
+          <div class="font-mono text-[11px] text-emerald-400 font-semibold">STAGE 03 // TIERED ELASTICSEARCH</div>
+          <div class="font-bold text-sm">Tier-0 (10s) → Tier-1 (1m) Rollup</div>
+          <p class="text-xs text-muted-custom leading-relaxed">Stores 10-second statistical snapshots in Tier-0 and converts them into 1-minute aggregated rollups in Tier-1.</p>
+        </div>
+
+        <div class="premium-card p-4 rounded-xl border-t-2 border-t-amber-400 space-y-1.5">
+          <div class="font-mono text-[11px] text-amber-400 font-semibold">STAGE 04 // GRAPHICAL UI</div>
+          <div class="font-bold text-sm">Clubbed Topology & Telemetry UI</div>
+          <p class="text-xs text-muted-custom leading-relaxed">Renders time-series statistical graphs and end-to-end Router ↔ Switch interface connectivity in the UI.</p>
         </div>
       </div>
     </section>
 
-    <!-- ================================================================= -->
-    <!-- EXPERIENCE & TECHNICAL MATRIX -->
-    <!-- ================================================================= -->
-    <section class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-      <div class="lg:col-span-7 space-y-4">
-        <h2 class="text-xl font-bold font-mono uppercase tracking-wider text-slate-300">Experience & Education</h2>
-        <div class="card-surface rounded-xl p-6 space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+    <!-- ======================================================================= -->
+    <!-- 3. ADDITIONAL INTERACTIVE SYSTEM BLUEPRINTS (10 Gbps, 98% DB, Agentic AI) -->
+    <!-- ======================================================================= -->
+    <section id="architecture" class="space-y-8 scroll-mt-20">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b hairline-border pb-4">
+        <div>
+          <div class="font-mono text-xs text-violet-400 uppercase tracking-widest mb-1">// 03. Core Distributed Systems & AI Blueprints</div>
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">10 Gbps Traffic Capture, 98% Query Optimization & Agentic AI</h2>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="selectCaseStudy(1)" id="tab-cs-1" class="px-3.5 py-2 rounded-xl font-mono text-xs font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/40">
+            CS-02: 1→10 Gbps Capture
+          </button>
+          <button onclick="selectCaseStudy(2)" id="tab-cs-2" class="px-3.5 py-2 rounded-xl font-mono text-xs font-semibold elevated-box text-muted-custom hover:text-current">
+            CS-03: 98% Latency Reduction
+          </button>
+          <button onclick="selectCaseStudy(3)" id="tab-cs-3" class="px-3.5 py-2 rounded-xl font-mono text-xs font-semibold elevated-box text-muted-custom hover:text-current">
+            CS-04: Agentic AI (MCP + LangGraph)
+          </button>
+        </div>
+      </div>
+
+      <!-- CS-02: 1 to 10 Gbps Packet Capture -->
+      <div id="panel-cs-1" class="premium-card rounded-2xl p-6 sm:p-8 space-y-6">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b hairline-border pb-4">
+          <div>
+            <span class="font-mono text-xs text-emerald-400 uppercase">CS-02 // HIGH-THROUGHPUT PACKET INGESTION</span>
+            <h3 class="text-xl sm:text-2xl font-bold mt-1">1-to-10 Gbps Zero-Packet-Loss Traffic Capture Pipeline</h3>
+          </div>
+          <div class="flex gap-3 font-mono text-xs">
+            <span class="elevated-box px-3 py-1.5 rounded-lg text-emerald-400 font-bold">10 Gbps Line-Rate</span>
+            <span class="elevated-box px-3 py-1.5 rounded-lg text-cyan-400 font-bold">0.00% Packet Drop</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <button onclick="inspectPipelineNode(0)" id="pipe-node-0" class="text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-500/10 transition-all">
+            <div class="font-mono text-[11px] text-emerald-300 mb-1">STAGE 01</div>
+            <div class="font-mono text-sm font-bold">10 Gbps NIC Ring Buffer</div>
+            <p class="text-xs text-muted-custom mt-1">Zero-copy wire-speed frame capture</p>
+          </button>
+          <button onclick="inspectPipelineNode(1)" id="pipe-node-1" class="text-left p-4 rounded-xl elevated-box hover:border-violet-500/50 transition-all">
+            <div class="font-mono text-[11px] text-violet-300 mb-1">STAGE 02</div>
+            <div class="font-mono text-sm font-bold">Go Concurrent Workers</div>
+            <p class="text-xs text-muted-custom mt-1">Lock-free channels & struct reuse</p>
+          </button>
+          <button onclick="inspectPipelineNode(2)" id="pipe-node-2" class="text-left p-4 rounded-xl elevated-box hover:border-violet-500/50 transition-all">
+            <div class="font-mono text-[11px] text-cyan-300 mb-1">STAGE 03</div>
+            <div class="font-mono text-sm font-bold">Kafka + Device Cache</div>
+            <p class="text-xs text-muted-custom mt-1">Partitioned stream & status cache</p>
+          </button>
+          <button onclick="inspectPipelineNode(3)" id="pipe-node-3" class="text-left p-4 rounded-xl elevated-box hover:border-violet-500/50 transition-all">
+            <div class="font-mono text-[11px] text-emerald-300 mb-1">STAGE 04</div>
+            <div class="font-mono text-sm font-bold">Elasticsearch Bulk API</div>
+            <p class="text-xs text-muted-custom mt-1">Async time-series shard indexing</p>
+          </button>
+        </div>
+
+        <div class="elevated-box rounded-xl p-5 border-l-4 border-l-emerald-500 space-y-2">
+          <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-xs">
+            <span id="inspector-stage-title" class="font-bold text-emerald-400">STAGE 01 // 10 GBPS NETWORK TAP & RING BUFFER INGESTION</span>
+            <span id="inspector-stage-metric" class="text-cyan-300">Bottleneck Solved: Kernel Socket Buffer Drops</span>
+          </div>
+          <p id="inspector-stage-desc" class="text-xs sm:text-sm text-muted-custom leading-relaxed">
+            Pre-allocated memory-mapped ring buffers decouple packet acquisition from downstream parsing so bursts at 10 Gbps line rate are captured with zero frame loss.
+          </p>
+        </div>
+      </div>
+
+      <!-- CS-03: 98% Latency Reduction -->
+      <div id="panel-cs-2" class="premium-card rounded-2xl p-6 sm:p-8 space-y-6 hidden">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b hairline-border pb-4">
+          <div>
+            <span class="font-mono text-xs text-violet-400 uppercase">CS-03 // RELATIONAL ENGINE OPTIMIZATION</span>
+            <h3 class="text-xl sm:text-2xl font-bold mt-1">98% Processing Time Reduction via PostgreSQL Stored Procedures</h3>
+          </div>
+          <span class="elevated-box px-3 py-1.5 rounded-lg font-mono text-xs text-emerald-400 font-bold">100% → 2% Execution Time</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-xs">
+          <div class="elevated-box p-5 rounded-xl border border-rose-500/30 space-y-3">
+            <div class="text-rose-400 font-bold">BEFORE: Application-Layer N+1 Iteration (100% Time)</div>
+            <div class="w-full bg-black/40 h-2.5 rounded-full overflow-hidden">
+              <div class="bg-rose-500 h-full w-full"></div>
+            </div>
+            <p class="text-muted-custom font-sans leading-relaxed">
+              Sequential ORM roundtrips and unindexed intermediate joins caused heavy network serialization overhead and JVM garbage collection pauses.
+            </p>
+          </div>
+
+          <div class="elevated-box p-5 rounded-xl border border-emerald-500/40 space-y-3">
+            <div class="text-emerald-400 font-bold">AFTER: Compiled PL/pgSQL Stored Procedures (2% Time / -98%)</div>
+            <div class="w-full bg-black/40 h-2.5 rounded-full overflow-hidden">
+              <div class="bg-emerald-400 h-full w-[2%]"></div>
+            </div>
+            <p class="text-muted-custom font-sans leading-relaxed">
+              Pushed complex set reconciliations into compiled PostgreSQL stored procedures with composite covering indexes, cutting total execution time by 98%.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CS-04: Agentic AI -->
+      <div id="panel-cs-3" class="premium-card rounded-2xl p-6 sm:p-8 space-y-6 hidden">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b hairline-border pb-4">
+          <div>
+            <span class="font-mono text-xs text-amber-400 uppercase">CS-04 // AUTONOMOUS AGENTIC AI</span>
+            <h3 class="text-xl sm:text-2xl font-bold mt-1">Stateful Multi-Agent Workflows with LangGraph, MCP & Ollama</h3>
+          </div>
+          <span class="elevated-box px-3 py-1.5 rounded-lg font-mono text-xs text-amber-300 font-bold">Air-Gapped Local LLM Inference</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="elevated-box p-4 rounded-xl space-y-1.5">
+            <div class="font-mono text-xs text-violet-400 font-bold">01. LangGraph State Machine</div>
+            <p class="text-xs text-muted-custom leading-relaxed">Cyclic reasoning graphs with typed state transitions and deterministic fallback edges for automated root-cause diagnostics.</p>
+          </div>
+          <div class="elevated-box p-4 rounded-xl space-y-1.5">
+            <div class="font-mono text-xs text-cyan-400 font-bold">02. Model Context Protocol (MCP)</div>
+            <p class="text-xs text-muted-custom leading-relaxed">Standardized JSON-RPC tool servers exposing live Elasticsearch telemetry, Kubernetes pod health, and repository context.</p>
+          </div>
+          <div class="elevated-box p-4 rounded-xl space-y-1.5">
+            <div class="font-mono text-xs text-emerald-400 font-bold">03. Local Ollama Runtime</div>
+            <p class="text-xs text-muted-custom leading-relaxed">On-premise LLM execution guaranteeing zero external data leakage of proprietary source code or telemetry.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================= -->
+    <!-- 4. EXPERIENCE TIMELINE & EDUCATION                                      -->
+    <!-- ======================================================================= -->
+    <section id="experience" class="space-y-6 scroll-mt-20">
+      <div class="border-b hairline-border pb-4">
+        <div class="font-mono text-xs text-emerald-400 uppercase tracking-widest mb-1">// 04. Career & Academic Track Record</div>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Experience & Education</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-8 premium-card rounded-2xl p-6 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b hairline-border pb-4">
             <div>
-              <h3 class="text-lg font-bold text-white">Senior Software Engineer</h3>
-              <div class="text-sm text-violet-400 font-mono">Samsung R&D Institute • Bengaluru, India</div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-lg sm:text-xl font-bold">Senior Software Engineer</h3>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Samsung R&D Institute Bangalore</span>
+              </div>
+              <p class="text-xs font-mono text-muted-custom mt-1">Distributed Backend Systems • High-Speed Network Telemetry • Agentic AI</p>
             </div>
-            <span class="text-xs font-mono px-2.5 py-1 rounded bg-slate-800 text-slate-300">Backend & Distributed Systems</span>
+            <span class="font-mono text-xs px-3 py-1 rounded-lg elevated-box text-violet-300">Production Systems</span>
           </div>
-          <ul class="space-y-2.5 text-sm text-slate-300 list-disc list-inside leading-relaxed">
-            <li><strong>gNMI Tunnel Telemetry & Topology Engine:</strong> Architected persistent gNMI client connectivity across <strong>5,000+ new vendor devices</strong>, ingesting <strong>~100 Mbps</strong> across 16 tunnel/interface metrics into Kafka and tiered Elasticsearch (10s Tier-0 → 1m Tier-1 rollups) with end-to-end UI topology visualization for clubbed Router + Switch hardware.</li>
-            <li><strong>1-to-10 Gbps Traffic Capture:</strong> Scaled network packet capture pipeline 10x with zero packet loss using Go, Java, Kafka device status caching, and Elasticsearch bulk indexing.</li>
-            <li><strong>Database Performance Engineering:</strong> Reduced data processing latency by <strong>98%</strong> using optimized PostgreSQL stored procedures.</li>
-            <li><strong>Agentic AI Systems:</strong> Built autonomous engineering workflows leveraging <strong>LangGraph</strong>, <strong>Model Context Protocol (MCP)</strong> tools, and local <strong>Ollama</strong> models on Kubernetes.</li>
+
+          <ul class="space-y-3 text-xs sm:text-sm text-muted-custom leading-relaxed">
+            <li class="flex items-start gap-2.5">
+              <span class="text-cyan-400 font-mono font-bold mt-0.5">01.</span>
+              <span><strong class="text-current">5,000-Device gNMI Tunnel Telemetry & Topology Engine:</strong> Architected persistent gNMI client connectivity for ~5,000 new vendor devices, streaming <strong>~100 Mbps</strong> across 16 tunnel/interface metrics into Kafka and tiered Elasticsearch (<strong>10s Tier-0 → 1m Tier-1</strong>), and integrated end-to-end UI graphical topology mapping for clubbed Router + Switch hardware.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-emerald-400 font-mono font-bold mt-0.5">02.</span>
+              <span><strong class="text-current">1-to-10 Gbps Traffic Capture Scaling:</strong> Engineered high-concurrency packet capture and ingestion pipelines in Go and Java with Kafka device status caching and Elasticsearch bulk indexing, scaling throughput 10x with zero packet loss.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-violet-400 font-mono font-bold mt-0.5">03.</span>
+              <span><strong class="text-current">98% Processing Latency Reduction:</strong> Refactored iterative application-layer queries into compiled PostgreSQL stored procedures and batch-indexed operations, cutting execution time by 98%.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-amber-400 font-mono font-bold mt-0.5">04.</span>
+              <span><strong class="text-current">Autonomous Agentic AI Tooling:</strong> Designed stateful multi-agent workflows using LangGraph, Model Context Protocol (MCP), and local Ollama models deployed on Kubernetes.</span>
+            </li>
           </ul>
         </div>
 
-        <div class="card-surface rounded-xl p-5 flex items-center justify-between">
-          <div>
-            <div class="text-sm font-bold text-white">B.Tech in Information Technology</div>
-            <div class="text-xs font-mono text-slate-400">Motilal Nehru National Institute of Technology (MNNIT) Allahabad</div>
+        <div class="lg:col-span-4 premium-card rounded-2xl p-6 flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-xs text-violet-400 uppercase">Education</span>
+              <span class="font-mono text-xs px-2.5 py-0.5 rounded elevated-box">Class of 2023</span>
+            </div>
+            <h3 class="text-lg font-bold">B.Tech in Information Technology</h3>
+            <p class="text-xs font-mono text-cyan-400">Motilal Nehru National Institute of Technology (MNNIT) Allahabad</p>
+            <p class="text-xs text-muted-custom leading-relaxed pt-2">
+              Core focus on Distributed Computing, Computer Networks, Operating Systems, Data Structures & Algorithms, and Database Management Systems.
+            </p>
           </div>
-          <span class="text-xs font-mono text-slate-400">Graduated 2023</span>
-        </div>
-      </div>
 
-      <div class="lg:col-span-5 space-y-4">
-        <h2 class="text-xl font-bold font-mono uppercase tracking-wider text-slate-300">Technical Stack</h2>
-        <div class="card-surface rounded-xl p-6 space-y-4 text-xs font-mono">
-          <div>
-            <div class="text-slate-400 mb-2">LANGUAGES & CORE</div>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-2.5 py-1 rounded bg-slate-800 text-white">Java</span>
-              <span class="px-2.5 py-1 rounded bg-slate-800 text-white">Golang (Go)</span>
-              <span class="px-2.5 py-1 rounded bg-slate-800 text-white">SQL / PL/pgSQL</span>
-              <span class="px-2.5 py-1 rounded bg-slate-800 text-white">Spring Boot</span>
-            </div>
-          </div>
-          <div>
-            <div class="text-slate-400 mb-2">NETWORKING & STREAMING TELEMETRY</div>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">gNMI / gRPC Tunnels</span>
-              <span class="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">10 Gbps Packet Capture</span>
-              <span class="px-2.5 py-1 rounded bg-slate-800 text-white">Apache Kafka</span>
-              <span class="px-2.5 py-1 rounded bg-slate-800 text-white">IPsec / IKE Telemetry</span>
-            </div>
-          </div>
-          <div>
-            <div class="text-slate-400 mb-2">DATA, CLOUD & INFRASTRUCTURE</div>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Elasticsearch (Tier-0 10s / Tier-1 1m)</span>
-              <span class="px-2.5 py-1 rounded bg-slate-800 text-white">PostgreSQL</span>
-              <span class="px-2.5 py-1 rounded bg-slate-800 text-white">Kubernetes</span>
-              <span class="px-2.5 py-1 rounded bg-slate-800 text-white">Docker</span>
-            </div>
-          </div>
-          <div>
-            <div class="text-slate-400 mb-2">AGENTIC AI</div>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-2.5 py-1 rounded bg-violet-500/20 text-violet-300 border border-violet-500/30">LangGraph</span>
-              <span class="px-2.5 py-1 rounded bg-violet-500/20 text-violet-300 border border-violet-500/30">Model Context Protocol (MCP)</span>
-              <span class="px-2.5 py-1 rounded bg-slate-800 text-white">Ollama (Local LLMs)</span>
-            </div>
+          <div class="elevated-box rounded-xl p-3.5 font-mono text-xs space-y-1.5">
+            <div class="text-muted-custom text-[10px]">VERIFIED PUBLIC PROFILES</div>
+            <a href="https://github.com/alokk48200" target="_blank" rel="noopener noreferrer" class="block text-emerald-400 hover:underline">github.com/alokk48200 ↗</a>
+            <a href="https://alokk48200.github.io/alokKumar/" target="_blank" rel="noopener noreferrer" class="block text-cyan-400 hover:underline">alokk48200.github.io/alokKumar ↗</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FOOTER & ONE-CLICK DOWNLOAD FOR GITHUB PAGES -->
-    <footer class="border-t border-slate-800 pt-8 pb-12 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-400">
-      <div>
-        ALOK KUMAR • Senior Software Engineer @ Samsung R&D Institute
+    <!-- ======================================================================= -->
+    <!-- 5. TECHNICAL RADAR & STACK MATRIX                                       -->
+    <!-- ======================================================================= -->
+    <section id="stack" class="space-y-6 scroll-mt-20">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b hairline-border pb-4">
+        <div>
+          <div class="font-mono text-xs text-emerald-400 uppercase tracking-widest mb-1">// 05. Technical Radar</div>
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Production Stack Matrix</h2>
+        </div>
+        <div class="flex flex-wrap gap-1.5 font-mono text-xs">
+          <button onclick="filterStack('all')" data-stack-btn="all" class="px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">All</button>
+          <button onclick="filterStack('telemetry')" data-stack-btn="telemetry" class="px-3 py-1.5 rounded-lg elevated-box text-muted-custom hover:text-current">Network & gNMI</button>
+          <button onclick="filterStack('distributed')" data-stack-btn="distributed" class="px-3 py-1.5 rounded-lg elevated-box text-muted-custom hover:text-current">Distributed & DB</button>
+          <button onclick="filterStack('ai')" data-stack-btn="ai" class="px-3 py-1.5 rounded-lg elevated-box text-muted-custom hover:text-current">Agentic AI & Cloud</button>
+        </div>
       </div>
-      <div class="flex items-center gap-4">
-        <button onclick="downloadPortfolioHTML()" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white font-medium transition">
-          ⬇ Download Deployable index.html
-        </button>
-        <a href="https://github.com/alokk48200/alokKumar" target="_blank" rel="noopener" class="hover:text-white transition">GitHub Repo ↗</a>
-      </div>
-    </footer>
+
+      <div id="stack-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+    </section>
 
   </main>
 
+  <!-- FOOTER -->
+  <footer class="border-t hairline-border py-10 px-4 sm:px-6 lg:px-8 text-xs font-mono text-muted-custom">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span>Alok Kumar — SDE 2 @ Samsung R&D Institute Bangalore • NIT Allahabad '23 (IT)</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-4">
+        <button onclick="openResumeModal()" class="px-3.5 py-1.5 rounded-lg elevated-box text-emerald-400 hover:border-emerald-500/40 font-semibold transition-all">
+          Resume Link
+        </button>
+        <button onclick="downloadFullSingleFile()" class="px-3.5 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-semibold hover:bg-emerald-400 transition-all">
+          ⬇ Download Deployable index.html
+        </button>
+        <a href="https://github.com/alokk48200/alokKumar" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors">GitHub Repo ↗</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- INTERACTIVE RESUME VIEWER MODAL -->
+  <div id="resume-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="premium-card rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-6 border border-violet-500/40 shadow-2xl">
+      <div class="flex items-start justify-between gap-4 border-b hairline-border pb-4">
+        <div>
+          <span class="font-mono text-xs text-emerald-400 uppercase">// RESUME SNAPSHOT & DIRECT LINK</span>
+          <h3 class="text-2xl font-extrabold mt-0.5">ALOK KUMAR — SDE 2 @ SAMSUNG</h3>
+          <p class="font-mono text-xs text-cyan-400 mt-0.5">B.Tech IT, NIT Allahabad (2023) • 3+ Years Backend Development</p>
+        </div>
+        <button onclick="closeResumeModal()" class="elevated-box px-3 py-1.5 rounded-lg font-mono text-xs hover:border-rose-500/50 text-muted-custom hover:text-white">
+          ✕ ESC
+        </button>
+      </div>
+
+      <!-- Core Resume Highlights -->
+      <div class="space-y-4 text-xs sm:text-sm text-muted-custom leading-relaxed">
+        <div class="elevated-box p-4 rounded-xl space-y-1.5">
+          <div class="font-mono text-xs font-bold text-violet-300">CORE TECHNICAL SKILLS</div>
+          <p class="font-mono text-xs text-current">
+            Java • Golang (Go) • Python • Apache Kafka • Elasticsearch (Tier-0/Tier-1) • NoSQL • PostgreSQL (PL/pgSQL) • gNMI / gRPC Tunnels • Agentic AI (LangGraph, MCP, Ollama) • Kubernetes • Docker
+          </p>
+        </div>
+
+        <div class="space-y-2.5">
+          <div class="font-mono text-xs font-bold text-emerald-400 uppercase">Key Production Achievements @ Samsung R&D Bangalore</div>
+          <ul class="space-y-2 list-disc list-inside">
+            <li><strong class="text-current">5,000+ Device Persistent gNMI Telemetry Engine:</strong> Engineered gNMI tunnel protocol support streaming ~100 Mbps across 16 tunnel/interface terms into Kafka & tiered Elasticsearch (10s Tier-0 → 1m Tier-1), plus end-to-end UI graphical topology for clubbed Router + Switch devices.</li>
+            <li><strong class="text-current">1-to-10 Gbps Packet Capture Scaling:</strong> Scaled network traffic capture 10x with 0% packet loss using Go, Java, Kafka device status caching, and Elasticsearch bulk indexing.</li>
+            <li><strong class="text-current">98% Latency Reduction:</strong> Optimized complex data processing workflows using compiled PostgreSQL stored procedures and composite indexing.</li>
+            <li><strong class="text-current">Agentic AI Orchestration:</strong> Built local-first multi-agent engineering workflows using LangGraph, Model Context Protocol (MCP), and Ollama.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t hairline-border font-mono text-xs">
+        <div class="flex flex-wrap gap-2">
+          <a href="./resume.pdf" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-bold hover:bg-emerald-400 transition-all">
+            Open ./resume.pdf ↗
+          </a>
+          <a href="https://github.com/alokk48200/alokKumar" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl elevated-box hover:border-cyan-500/40 transition-all">
+            GitHub Repository ↗
+          </a>
+        </div>
+        <button onclick="closeResumeModal()" class="px-4 py-2 rounded-xl elevated-box text-muted-custom hover:text-current">
+          Close Preview
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPLICATION SCRIPT -->
   <script>
-    // 16 Streamed gNMI Telemetry Terms (including user's exact IPsec/Interface counters)
-    const linkProfiles = [
-      {
-        label: "Link #1: ge-0/0/0 → sw-eth1 (Breakout A)",
-        multiplier: 1.0
-      },
-      {
-        label: "Link #2: ge-0/0/0 → sw-eth2 (Breakout B)",
-        multiplier: 0.85
-      },
-      {
-        label: "Link #3: ge-0/0/1 → sw-eth3 (Direct Uplink)",
-        multiplier: 1.25
-      },
-      {
-        label: "Link #4: ge-0/0/2 → sw-eth4 (Direct Uplink)",
-        multiplier: 0.92
-      }
-    ];
-
-    const baseSixteenTerms = [
-      { key: "active_tunnel", tier0: 1240, tier1: "1,238 avg", unit: "tunnels" },
-      { key: "tunnel_negotiation", tier0: 18, tier1: "14/min", unit: "states" },
-      { key: "active_tunnel_negotiating", tier0: 6, tier1: "4 avg", unit: "sessions" },
-      { key: "ike_gateway_status", tier0: "UP (ESTAB)", tier1: "99.99% UP", unit: "" },
-      { key: "packets_received", tier0: "148,920", tier1: "8.93M / min", unit: "pkts" },
-      { key: "bytes_received", tier0: "12.4 MB", tier1: "744 MB / min", unit: "" },
-      { key: "packets_dropped", tier0: "0", tier1: "0 / min", unit: "pkts" },
-      { key: "bytes_dropped", tier0: "0 B", tier1: "0 B / min", unit: "" },
-      { key: "packets_transmitted", tier0: "142,110", tier1: "8.52M / min", unit: "pkts" },
-      { key: "bytes_transmitted", tier0: "11.8 MB", tier1: "708 MB / min", unit: "" },
-      { key: "ike_sa_rekeys", tier0: 2, tier1: "11 / min", unit: "events" },
-      { key: "ipsec_sa_active", tier0: 2480, tier1: "2,476 avg", unit: "SAs" },
-      { key: "tunnel_keepalive_rtt", tier0: "1.4 ms", tier1: "1.5 ms p95", unit: "" },
-      { key: "rx_crc_errors", tier0: 0, tier1: "0 / min", unit: "errs" },
-      { key: "interface_admin_state", tier0: "ENABLED", tier1: "ENABLED", unit: "" },
-      { key: "lldp_neighbor_port", tier0: "sw-eth1", tier1: "VERIFIED", unit: "" }
-    ];
-
-    let currentLinkIndex = 0;
-    let currentTier = 'tier0';
-
-    function renderTelemetryTerms() {
-      const grid = document.getElementById('telemetry-terms-grid');
-      const swPorts = ['sw-eth1', 'sw-eth2', 'sw-eth3', 'sw-eth4'];
-      grid.innerHTML = baseSixteenTerms.map((item, idx) => {
-        let val = currentTier === 'tier0' ? item.tier0 : item.tier1;
-        if (item.key === 'lldp_neighbor_port' && currentTier === 'tier0') {
-          val = swPorts[currentLinkIndex];
+    // Profile Photo Live Preview Handler
+    function handleProfilePhotoUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = document.getElementById('alok-profile-img');
+        if (img && e.target && e.target.result) {
+          img.src = e.target.result;
         }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Resume Modal Controls
+    function openResumeModal() {
+      const modal = document.getElementById('resume-modal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeResumeModal() {
+      const modal = document.getElementById('resume-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeResumeModal();
+    });
+
+    // 1. 16 gNMI Streamed Telemetry Terms (Tier-0 10s vs Tier-1 1m Rollup)
+    const TOPO_LINKS = [
+      { label: "Active: ge-0/0/0 ↔ sw-eth1 (Breakout A)", neighbor: "sw-eth1", rNode: "svg-r1", sNode: "svg-s1" },
+      { label: "Active: ge-0/0/0 ↔ sw-eth2 (Breakout B)", neighbor: "sw-eth2", rNode: "svg-r1", sNode: "svg-s2" },
+      { label: "Active: ge-0/0/1 ↔ sw-eth3 (Direct Link)", neighbor: "sw-eth3", rNode: "svg-r2", sNode: "svg-s3" },
+      { label: "Active: ge-0/0/2 ↔ sw-eth4 (Direct Link)", neighbor: "sw-eth4", rNode: "svg-r3", sNode: "svg-s4" }
+    ];
+
+    const GNMI_SIXTEEN_TERMS = [
+      { name: "active_tunnel", tier0: "1,240", tier1: "1,238 avg/m" },
+      { name: "tunnel_negotiation", tier0: "18 / 10s", tier1: "104 / min" },
+      { name: "active_tunnel_negotiating", tier0: "6 active", tier1: "5.2 avg/m" },
+      { name: "ike_gateway", tier0: "ESTABLISHED", tier1: "99.99% UP" },
+      { name: "packets_received", tier0: "148,920 pkts", tier1: "8.93M pkts/m" },
+      { name: "bytes_received", tier0: "12.4 MB / 10s", tier1: "74.4 MB / min" },
+      { name: "packets_dropped", tier0: "0 pkts", tier1: "0 pkts/m" },
+      { name: "bytes_dropped", tier0: "0 Bytes", tier1: "0 Bytes/m" },
+      { name: "packets_transmitted", tier0: "142,110 pkts", tier1: "8.52M pkts/m" },
+      { name: "bytes_transmitted", tier0: "11.8 MB / 10s", tier1: "70.8 MB / min" },
+      { name: "ike_sa_rekeys", tier0: "2 events", tier1: "11 / min" },
+      { name: "ipsec_sa_active", tier0: "2,480 SAs", tier1: "2,476 avg/m" },
+      { name: "tunnel_keepalive_rtt", tier0: "1.4 ms", tier1: "1.5 ms p95" },
+      { name: "rx_crc_errors", tier0: "0 errs", tier1: "0 errs/m" },
+      { name: "interface_admin_state", tier0: "UP / FULL", tier1: "STABLE" },
+      { name: "lldp_neighbor_port", tier0: "sw-eth1", tier1: "TOPOLOGY LOCKED" }
+    ];
+
+    let activeLinkIdx = 0;
+    let activeStorageTier = 'tier0';
+
+    function renderGnmiTerms() {
+      const grid = document.getElementById('gnmi-terms-grid');
+      const neighborPort = TOPO_LINKS[activeLinkIdx].neighbor;
+
+      grid.innerHTML = GNMI_SIXTEEN_TERMS.map((item, idx) => {
+        let value = activeStorageTier === 'tier0' ? item.tier0 : item.tier1;
+        if (item.name === 'lldp_neighbor_port' && activeStorageTier === 'tier0') {
+          value = neighborPort;
+        }
+        const valueColor = activeStorageTier === 'tier0' ? 'text-emerald-400' : 'text-cyan-300';
         return `
-          <div class="p-2 rounded bg-slate-900/90 border border-slate-800/90 flex flex-col justify-between">
-            <span class="text-[10px] text-slate-400 truncate">${idx + 1}. ${item.key}</span>
-            <span class="text-xs font-semibold ${currentTier === 'tier0' ? 'text-emerald-400' : 'text-cyan-300'} mt-0.5">${val} ${item.unit}</span>
+          <div class="p-2.5 rounded-lg elevated-box flex flex-col justify-between">
+            <span class="text-[10px] text-muted-custom truncate">${String(idx + 1).padStart(2, '0')}. ${item.name}</span>
+            <span class="text-xs font-bold ${valueColor} mt-0.5">${value}</span>
           </div>
         `;
       }).join('');
     }
 
-    function selectTopologyLink(index) {
-      currentLinkIndex = index;
-      document.getElementById('selected-link-badge').textContent = linkProfiles[index].label;
+    function selectTopologyLink(idx) {
+      activeLinkIdx = idx;
+      document.getElementById('selected-link-badge').textContent = TOPO_LINKS[idx].label;
 
+      // Reset all lines & buttons
       for (let i = 0; i < 4; i++) {
-        const line = document.getElementById(`link-${i}`);
-        const btn = document.getElementById(`link-btn-${i}`);
-        if (i === index) {
+        const line = document.getElementById(`topo-line-${i}`);
+        const btn = document.getElementById(`topo-btn-${i}`);
+        if (i === idx) {
           line.setAttribute('stroke', '#06B6D4');
-          line.setAttribute('stroke-width', '3');
+          line.setAttribute('stroke-width', '3.4');
           line.classList.add('animated-link');
-          btn.className = "p-2 rounded border border-cyan-500/60 bg-cyan-500/10 text-cyan-300 text-left";
+          line.setAttribute('filter', 'url(#cyanGlow)');
+          btn.className = "p-2.5 rounded-xl border-2 border-cyan-500 bg-cyan-500/10 text-cyan-300 text-left transition-all";
         } else {
           line.setAttribute('stroke', '#8B5CF6');
-          line.setAttribute('stroke-width', '2');
+          line.setAttribute('stroke-width', '2.2');
           line.classList.remove('animated-link');
-          btn.className = "p-2 rounded border border-slate-800 bg-slate-900/60 text-slate-300 text-left hover:border-violet-500/40";
+          line.removeAttribute('filter');
+          btn.className = "p-2.5 rounded-xl elevated-box hover:border-violet-500/50 text-left transition-all";
         }
       }
-      renderTelemetryTerms();
+
+      // Highlight active Router & Switch boxes
+      ['svg-r1', 'svg-r2', 'svg-r3', 'svg-s1', 'svg-s2', 'svg-s3', 'svg-s4'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.setAttribute('stroke', '#8B5CF6');
+          el.setAttribute('stroke-width', '2');
+        }
+      });
+      document.getElementById(TOPO_LINKS[idx].rNode).setAttribute('stroke', '#06B6D4');
+      document.getElementById(TOPO_LINKS[idx].sNode).setAttribute('stroke', '#06B6D4');
+
+      renderGnmiTerms();
     }
 
     function setStorageTier(tier) {
-      currentTier = tier;
-      const t0Btn = document.getElementById('tier0-btn');
-      const t1Btn = document.getElementById('tier1-btn');
-      const desc = document.getElementById('tier-description');
+      activeStorageTier = tier;
+      const b0 = document.getElementById('btn-tier0');
+      const b1 = document.getElementById('btn-tier1');
+      const banner = document.getElementById('tier-status-banner');
 
       if (tier === 'tier0') {
-        t0Btn.className = "px-2 py-1 rounded bg-emerald-600 text-white font-medium transition";
-        t1Btn.className = "px-2 py-1 rounded text-slate-400 hover:text-white transition";
-        desc.innerHTML = "Showing <strong>Tier-0 Hot Index (10-second interval)</strong> raw gNMI telemetry pushed via Kafka for real-time interface diagnostics.";
+        b0.className = "px-2.5 py-1 rounded bg-emerald-500 text-slate-950 font-bold transition-all";
+        b1.className = "px-2.5 py-1 rounded text-muted-custom hover:text-current transition-all";
+        banner.innerHTML = `<strong class="text-emerald-400">Tier-0 Elasticsearch (10s Statistics):</strong> High-resolution streaming counters ingested directly from Kafka for live tunnel & link-state monitoring.`;
       } else {
-        t1Btn.className = "px-2 py-1 rounded bg-cyan-600 text-white font-medium transition";
-        t0Btn.className = "px-2 py-1 rounded text-slate-400 hover:text-white transition";
-        desc.innerHTML = "Showing <strong>Tier-1 Rollup Index (1-minute aggregation)</strong> converted from Tier-0 for fast historical UI charting.";
+        b1.className = "px-2.5 py-1 rounded bg-cyan-400 text-slate-950 font-bold transition-all";
+        b0.className = "px-2.5 py-1 rounded text-muted-custom hover:text-current transition-all";
+        banner.innerHTML = `<strong class="text-cyan-400">Tier-1 Elasticsearch (1-Minute Rollup):</strong> Downsampled per-minute aggregations converted from Tier-0 for fast UI historical graphs.`;
       }
-      renderTelemetryTerms();
+      renderGnmiTerms();
     }
 
+    // 2. 10 Gbps Pipeline Stage Inspector
+    const PIPELINE_STAGES = [
+      {
+        title: "STAGE 01 // 10 GBPS NETWORK TAP & RING BUFFER INGESTION",
+        metric: "Bottleneck Solved: Kernel Socket Buffer Drops",
+        desc: "Pre-allocated memory-mapped ring buffers decouple packet acquisition from downstream parsing so bursts at 10 Gbps line rate are captured with zero frame loss."
+      },
+      {
+        title: "STAGE 02 // GO CONCURRENT WORKER POOLS",
+        metric: "Bottleneck Solved: Lock Contention & GC Pauses",
+        desc: "Go worker pools consume raw packet batches via bounded lock-free channels and reuse struct memory to sustain deterministic sub-millisecond handoff."
+      },
+      {
+        title: "STAGE 03 // APACHE KAFKA & DEVICE STATUS CACHE",
+        metric: "Bottleneck Solved: Downstream Backpressure & Redundant Lookups",
+        desc: "Partitioned Kafka streams buffer telemetry bursts while an in-memory device status cache eliminates redundant relational lookups during stream enrichment."
+      },
+      {
+        title: "STAGE 04 // ELASTICSEARCH ASYNC BULK INDEXING",
+        metric: "Bottleneck Solved: Per-Document Write Overhead",
+        desc: "Consumers batch enriched telemetry records into asynchronous Elasticsearch _bulk payloads with time-series index rollover for real-time querying."
+      }
+    ];
+
+    function inspectPipelineNode(idx) {
+      const s = PIPELINE_STAGES[idx];
+      [0, 1, 2, 3].forEach(i => {
+        const btn = document.getElementById(`pipe-node-${i}`);
+        btn.className = i === idx
+          ? "text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-500/10 transition-all"
+          : "text-left p-4 rounded-xl elevated-box hover:border-violet-500/50 transition-all";
+      });
+      document.getElementById('inspector-stage-title').textContent = s.title;
+      document.getElementById('inspector-stage-metric').textContent = s.metric;
+      document.getElementById('inspector-stage-desc').textContent = s.desc;
+    }
+
+    function selectCaseStudy(idx) {
+      [1, 2, 3].forEach(i => {
+        document.getElementById(`panel-cs-${i}`).classList.toggle('hidden', i !== idx);
+        document.getElementById(`tab-cs-${i}`).className = i === idx
+          ? "px-3.5 py-2 rounded-xl font-mono text-xs font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/40"
+          : "px-3.5 py-2 rounded-xl font-mono text-xs font-semibold elevated-box text-muted-custom hover:text-current";
+      });
+    }
+
+    // 3. Stack Matrix Filter
+    const TECH_STACK = [
+      { name: "gNMI / gRPC Tunnels", category: "telemetry", badge: "5,000+ Devices", desc: "Persistent streaming telemetry clients across 16 tunnel/interface terms @ ~100 Mbps" },
+      { name: "10 Gbps Packet Capture", category: "telemetry", badge: "Zero-Drop", desc: "High-speed NIC ring buffers & concurrent Go worker pools scaling 1 → 10 Gbps" },
+      { name: "Topology Link Discovery", category: "telemetry", badge: "Router ↔ Switch", desc: "End-to-end interface & breakout link resolution for clubbed vendor hardware" },
+      { name: "Golang (Go) & Java", category: "telemetry", badge: "Core Backend", desc: "High-concurrency systems programming, Spring Boot microservices & stream workers" },
+      { name: "Elasticsearch Tier-0 / Tier-1", category: "distributed", badge: "10s → 1m Rollup", desc: "Two-tier time-series indexing: 10s hot statistics converted to 1-minute UI rollups" },
+      { name: "Apache Kafka", category: "distributed", badge: "Event Streaming", desc: "Partitioned high-throughput telemetry bus with in-memory device status caching" },
+      { name: "PostgreSQL Stored Procs", category: "distributed", badge: "-98% Latency", desc: "Compiled PL/pgSQL procedures & composite indexes eliminating N+1 bottlenecks" },
+      { name: "Distributed Caching", category: "distributed", badge: "Low Latency", desc: "In-memory device state & interface lookup acceleration for streaming pipelines" },
+      { name: "LangGraph", category: "ai", badge: "Agent State", desc: "Stateful cyclic multi-agent orchestration for autonomous engineering diagnostics" },
+      { name: "Model Context Protocol", category: "ai", badge: "MCP Servers", desc: "Standardized JSON-RPC tool servers bridging LLMs with live telemetry & K8s" },
+      { name: "Ollama (Local LLMs)", category: "ai", badge: "On-Prem AI", desc: "Privacy-preserving local LLM inference with zero external token leakage" },
+      { name: "Kubernetes & Docker", category: "ai", badge: "Cloud-Native", desc: "Container orchestration, autoscaling & immutable deployments for backend fleets" }
+    ];
+
+    function filterStack(cat) {
+      document.querySelectorAll('[data-stack-btn]').forEach(btn => {
+        btn.className = btn.getAttribute('data-stack-btn') === cat
+          ? "px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40"
+          : "px-3 py-1.5 rounded-lg elevated-box text-muted-custom hover:text-current";
+      });
+      const items = cat === 'all' ? TECH_STACK : TECH_STACK.filter(x => x.category === cat);
+      document.getElementById('stack-grid').innerHTML = items.map(item => `
+        <div class="premium-card rounded-xl p-4 flex flex-col justify-between space-y-2.5">
+          <div class="flex items-center justify-between gap-2">
+            <h4 class="font-mono text-sm font-bold">${item.name}</h4>
+            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">${item.badge}</span>
+          </div>
+          <p class="text-xs text-muted-custom leading-relaxed">${item.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    // 4. View Mode & Theme Toggle
     function setViewMode(mode) {
-      const deepBlocks = document.querySelectorAll('.deep-block');
-      const btnRec = document.getElementById('btn-recruiter');
-      const btnBal = document.getElementById('btn-balanced');
-      const btnDeep = document.getElementById('btn-deep');
-
-      [btnRec, btnBal, btnDeep].forEach(b => b.className = "px-2.5 py-1 rounded transition text-slate-400 hover:text-white");
-
+      document.body.setAttribute('data-view-mode', mode);
+      ['recruiter', 'hybrid', 'deepdive'].forEach(m => {
+        const btn = document.getElementById(`btn-mode-${m}`);
+        btn.className = m === mode
+          ? "px-2.5 py-1 rounded-md transition-all flex items-center gap-1 bg-violet-500/20 text-violet-300 border border-violet-500/40 font-semibold"
+          : "px-2.5 py-1 rounded-md transition-all flex items-center gap-1 text-muted-custom hover:text-current";
+      });
+      const status = document.getElementById('mode-status-text');
       if (mode === 'recruiter') {
-        btnRec.className = "px-2.5 py-1 rounded transition bg-violet-600 text-white font-medium";
-        deepBlocks.forEach(el => el.classList.add('hidden'));
-      } else if (mode === 'balanced') {
-        btnBal.className = "px-2.5 py-1 rounded transition bg-violet-600 text-white font-medium";
-        deepBlocks.forEach((el, idx) => idx === 0 ? el.classList.remove('hidden') : el.classList.add('hidden'));
+        status.innerHTML = `<strong class="text-emerald-400">RECRUITER MODE:</strong> Highlighting Executive Impact (5,000+ devices, 1→10 Gbps, -98% latency) & product delivery.`;
+      } else if (mode === 'deepdive') {
+        status.innerHTML = `<strong class="text-cyan-400">DEEP-DIVE MODE:</strong> Exposing gNMI tunnel multiplexing, Tier-0 (10s) to Tier-1 (1m) ES rollups, and clubbed topology resolution.`;
       } else {
-        btnDeep.className = "px-2.5 py-1 rounded transition bg-cyan-600 text-white font-medium";
-        deepBlocks.forEach(el => el.classList.remove('hidden'));
+        status.innerHTML = `<strong class="text-violet-400">BALANCED MODE:</strong> Showing Executive Impact + Interactive 5,000-Device gNMI Topology & 10 Gbps System Blueprints.`;
       }
     }
 
     function toggleTheme() {
-      document.documentElement.classList.toggle('dark');
+      const isDark = document.documentElement.classList.toggle('dark');
+      document.getElementById('theme-icon-dark').classList.toggle('hidden', !isDark);
+      document.getElementById('theme-icon-light').classList.toggle('hidden', isDark);
     }
 
-    function downloadPortfolioHTML() {
-      const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-      const blob = new Blob([htmlContent], { type: 'text/html' });
+    function downloadFullSingleFile() {
+      const fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+      const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
       a.download = 'index.html';
+      document.body.appendChild(a);
       a.click();
+      document.body.removeChild(a);
     }
 
-    // Initialize on load
-    renderTelemetryTerms();
-    setViewMode('balanced');
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      renderGnmiTerms();
+      filterStack('all');
+    });
   </script>
 </body>
 </html>
